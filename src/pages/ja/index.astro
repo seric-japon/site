@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PremiumHome from "../../components/PremiumHome.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "ja" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout
+  lang={lang}
+  title="SERIC — 欧州産業の、日本と韓国における戦略パートナー"
+  description={t("hero_sub")}
+>
+  <PremiumHome lang={lang} />
+</BaseLayout>

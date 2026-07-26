@@ -1,0 +1,150 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath, isCJK } from "../i18n/utils";
+import Img from "./Img.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const titleSize = isCJK(lang) ? "42px" : "48px";
+---
+<section id="story" class="story">
+  <div class="wrap">
+    <div class="text" data-reveal-left>
+      <div class="eyebrow">
+        <span class="rule" />
+        {t("story_eyebrow")}
+      </div>
+      <h2 style={`font-size:${titleSize};`}>{t("story_title")}</h2>
+      <p>{t("story_body")}</p>
+      <a href={localizedPath(lang, "/histoire")} class="cta">
+        {t("story_cta")} <span>→</span>
+      </a>
+
+      <div class="timeline">
+        <span>1981 Tokyo</span>
+        <span>·</span>
+        <span>1998 Seoul</span>
+      </div>
+    </div>
+
+    <div class="portrait" data-reveal-right>
+      <Img src="/images/heritage.jpg" alt="Tokyo, archives" position="center" />
+      <div class="caption">
+        <span>Christian Polak</span>
+        <span class="role">{t("story_caption_role")}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story {
+    background: #fbfaf7;
+    padding: 140px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b95c4;
+    font-weight: 600;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rule { width: 28px; height: 1px; background: #6b95c4; }
+  h2 {
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+    color: #0a1a2e;
+    text-wrap: balance;
+  }
+  .text p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(11, 34, 64, 0.72);
+    margin: 0 0 36px;
+    max-width: 540px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #0a1a2e;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0a1a2e;
+    text-decoration: none;
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      gap 0.2s;
+  }
+  .cta:hover {
+    color: #6b95c4;
+    border-bottom-color: #6b95c4;
+    gap: 20px;
+  }
+
+  .timeline {
+    margin-top: 56px;
+    display: flex;
+    gap: 24px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(11, 34, 64, 0.45);
+    font-weight: 500;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  .portrait {
+    height: 560px;
+    position: relative;
+  }
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 24px;
+    background: rgba(11, 34, 64, 0.92);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+  }
+  .role { color: #a6c4e4; }
+
+  @media (max-width: 1000px) {
+    .wrap { grid-template-columns: 1fr; gap: 48px; }
+    .portrait { height: 380px; }
+  }
+  @media (max-width: 700px) {
+    .story { padding: 80px 24px; }
+    h2 { font-size: 32px !important; }
+    .timeline { flex-wrap: wrap; gap: 12px; }
+  }
+</style>

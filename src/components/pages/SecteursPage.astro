@@ -1,0 +1,91 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { useTranslations, isCJK } from "../../i18n/utils";
+import Nav from "../Nav.astro";
+import PageHero from "../PageHero.astro";
+import Img from "../Img.astro";
+import CTA from "../CTA.astro";
+import Footer from "../Footer.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const sectors = [
+  { tag: t("sec_auto_tag"), t: t("sec_auto_t"), d: t("sec_auto_long"), img: "/images/sector-automobile.jpg" },
+  { tag: t("sec_def_tag"),  t: t("sec_def_t"),  d: t("sec_def_long"),  img: "/images/sector-aerospace.jpg" },
+  { tag: "",                t: t("sec_ene_t"),  d: t("sec_ene_long"),  img: "/images/sector-energy.jpg" },
+  { tag: "",                t: t("sec_cul_t"),  d: t("sec_cul_long"),  img: "/images/sector-culture.jpg" },
+];
+const titleSize = isCJK(lang) ? "44px" : "52px";
+---
+<div class="seric-premium">
+  <Nav lang={lang} path="/secteurs" />
+  <PageHero
+    eyebrow={t("nav_sectors")}
+    title={t("sec_hero_title")}
+    sub={t("sec_hero_sub")}
+    image="/images/sector-aerospace.jpg"
+    alt="Aérospatial, turbine"
+    position="center"
+    titleSize={titleSize}
+  />
+
+  <section class="intro">
+    <div class="wrap"><p>{t("sec_intro")}</p></div>
+  </section>
+
+  <section class="rows">
+    <div class="wrap">
+      {sectors.map((s, i) => (
+        <article class="row" data-flip={i % 2 === 1 ? "true" : "false"} data-reveal>
+          <div class="media"><Img src={s.img} alt={s.t} /></div>
+          <div class="body">
+            {s.tag && <span class="tag">{s.tag}</span>}
+            <h2>{s.t}</h2>
+            <p>{s.d}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+  <Footer lang={lang} />
+</div>
+
+<style>
+  .intro { background: #fbfaf7; padding: 90px 56px 0; }
+  .intro .wrap { max-width: 1320px; margin: 0 auto; }
+  .intro p {
+    max-width: 760px; margin: 0; font-size: 22px; line-height: 1.5;
+    font-weight: 300; color: #0a1a2e; letter-spacing: -0.01em; text-wrap: balance;
+  }
+
+  .rows { background: #fbfaf7; padding: 80px 56px 130px; }
+  .rows .wrap { max-width: 1320px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px; }
+  .row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  }
+  .row[data-flip="true"] .media { order: 2; }
+  .media { height: 380px; overflow: hidden; }
+  .media :global(.seric-img) { transition: transform 0.7s ease; }
+  .row:hover .media :global(.seric-img) { transform: scale(1.04); }
+  .tag {
+    display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #0b2240; background: #a6c4e4; padding: 6px 10px; margin-bottom: 20px;
+  }
+  .body h2 { font-size: 34px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 20px; color: #0a1a2e; }
+  .body p { font-size: 17px; line-height: 1.7; color: rgba(11,34,64,0.72); margin: 0; max-width: 520px; }
+
+  @media (max-width: 900px) {
+    .intro { padding: 60px 24px 0; }
+    .intro p { font-size: 18px; }
+    .rows { padding: 56px 24px 80px; }
+    .rows .wrap { gap: 56px; }
+    .row, .row[data-flip="true"] { grid-template-columns: 1fr; gap: 24px; }
+    .row[data-flip="true"] .media { order: 0; }
+    .media { height: 240px; }
+    .body h2 { font-size: 26px; }
+  }
+</style>

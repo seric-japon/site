@@ -1,0 +1,150 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath, isCJK } from "../i18n/utils";
+import Img from "./Img.astro";
+
+interface Props {
+  lang: Lang;
+  /** Cinematic, subtle, or none — controls the dark overlay over the hero image. */
+  heroOverlay?: "cinematic" | "subtle" | "none";
+}
+const { lang, heroOverlay = "cinematic" } = Astro.props;
+const t = useTranslations(lang);
+
+const overlays = {
+  cinematic:
+    "linear-gradient(100deg, rgba(7,22,41,0.92) 0%, rgba(7,22,41,0.65) 38%, rgba(7,22,41,0.10) 100%)",
+  subtle:
+    "linear-gradient(100deg, rgba(7,22,41,0.78) 0%, rgba(7,22,41,0.40) 40%, rgba(7,22,41,0.00) 100%)",
+  none: "linear-gradient(180deg, rgba(7,22,41,0.40) 0%, rgba(7,22,41,0.10) 100%)",
+} as const;
+
+const titleFontSize = isCJK(lang) ? "64px" : "76px";
+---
+<section class="hero">
+  <div class="hero-image">
+    <Img
+      src="/images/hero-automobile.jpg"
+      alt="Intérieur d’automobile premium, détail"
+      eager
+      position="center 40%"
+    />
+  </div>
+  <div class="hero-overlay" style={`background:${overlays[heroOverlay]};`} />
+  <div class="hero-corner-glow" />
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="rule" />
+        {t("hero_eyebrow")}
+      </div>
+
+      <h1 style={`font-size:${titleFontSize};`}>{t("hero_title")}</h1>
+
+      <p class="hero-sub">{t("hero_sub")}</p>
+
+      <div class="hero-ctas">
+        <a href={localizedPath(lang, "/contact")} class="cta-primary">
+          {t("hero_cta_primary")} <span>→</span>
+        </a>
+        <a href={localizedPath(lang, "/solutions")} class="cta-secondary">{t("hero_cta_secondary")}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 820px;
+    background: #071629;
+    overflow: hidden;
+    color: #fff;
+  }
+  .hero-image { position: absolute; inset: 0; }
+  .hero-overlay { position: absolute; inset: 0; }
+  .hero-corner-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 360px;
+    height: 360px;
+    background: linear-gradient(225deg, rgba(166, 196, 228, 0.13) 0%, transparent 60%);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 170px 56px 0;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .hero-content { max-width: 780px; }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a6c4e4;
+    margin-bottom: 32px;
+  }
+  .rule { width: 32px; height: 1px; background: #a6c4e4; }
+  h1 {
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    margin: 0 0 32px;
+    text-wrap: balance;
+  }
+  .hero-sub {
+    font-size: 19px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 620px;
+    margin: 0 0 44px;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .cta-primary,
+  .cta-secondary {
+    padding: 16px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.25s;
+    border-radius: 0;
+  }
+  .cta-primary {
+    background: #a6c4e4;
+    color: #0b2240;
+  }
+  .cta-primary:hover { background: #fff; }
+  .cta-secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+  }
+  .cta-secondary:hover {
+    border-color: #a6c4e4;
+    color: #a6c4e4;
+  }
+
+  @media (max-width: 900px) {
+    .hero { height: auto; min-height: 100vh; }
+    .hero-inner { padding: 140px 24px 80px; }
+    .hero h1 { font-size: 44px !important; }
+    .hero-sub { font-size: 16px; }
+  }
+</style>

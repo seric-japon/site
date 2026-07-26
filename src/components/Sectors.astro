@@ -1,0 +1,212 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath, isCJK } from "../i18n/utils";
+import Img from "./Img.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const sectorsHref = localizedPath(lang, "/secteurs");
+
+const priority = [
+  { tt: t("sec_auto_t"), dd: t("sec_auto_d"), tag: t("sec_auto_tag"), img: "/images/sector-automobile.jpg" },
+  { tt: t("sec_def_t"),  dd: t("sec_def_d"),  tag: t("sec_def_tag"),  img: "/images/sector-aerospace.jpg" },
+];
+const secondary = [
+  { tt: t("sec_ene_t"), dd: t("sec_ene_d"), img: "/images/sector-energy.jpg" },
+  { tt: t("sec_cul_t"), dd: t("sec_cul_d"), img: "/images/sector-culture.jpg" },
+];
+
+const headingSize = isCJK(lang) ? "42px" : "48px";
+---
+<section id="sectors" class="sectors">
+  <div class="wrap">
+    <div class="header">
+      <div class="eyebrow">
+        <span class="rule" />
+        {t("nav_sectors")}
+      </div>
+      <h2 style={`font-size:${headingSize};`}>{t("sec_title")}</h2>
+    </div>
+
+    <div class="priority" data-reveal-stagger>
+      {priority.map((s) => (
+        <a class="prio-card" href={sectorsHref}>
+          <div class="prio-img"><Img src={s.img} alt={s.tt} /></div>
+          <div class="prio-overlay" />
+          <div class="prio-tag">{s.tag}</div>
+          <div class="prio-body">
+            <h3>{s.tt}</h3>
+            <p>{s.dd}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="secondary">
+      {secondary.map((s) => (
+        <a class="prio-card prio-card--sm" href={sectorsHref}>
+          <div class="prio-img"><Img src={s.img} alt={s.tt} /></div>
+          <div class="prio-overlay" />
+          <div class="prio-body">
+            <h3>{s.tt}</h3>
+            <p>{s.dd}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sectors {
+    background: #071629;
+    color: #fff;
+    padding: 140px 56px;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+
+  .header {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a6c4e4;
+    font-weight: 600;
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rule { width: 28px; height: 1px; background: #a6c4e4; }
+  h2 {
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .priority {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .prio-card {
+    height: 420px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+  }
+  .prio-img {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.6s ease;
+  }
+  .prio-card:hover .prio-img { transform: scale(1.04); }
+  .prio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, #071629 100%);
+    opacity: 0.55;
+    transition: opacity 0.35s;
+  }
+  .prio-card:hover .prio-overlay { opacity: 0.85; }
+  .prio-tag {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0b2240;
+    background: #a6c4e4;
+    padding: 6px 10px;
+  }
+  .prio-body {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    color: #fff;
+  }
+  .prio-body h3 {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .prio-body p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .secondary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .prio-card--sm { height: 300px; }
+  .prio-card--sm .prio-body h3 { font-size: 26px; }
+  .sec-card {
+    padding: 32px 36px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    transition:
+      background 0.25s,
+      border-color 0.25s;
+  }
+  .sec-card:hover {
+    background: rgba(166, 196, 228, 0.06);
+    border-color: rgba(166, 196, 228, 0.30);
+  }
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .sec-head h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+    color: #fff;
+  }
+  .sec-arrow { color: #a6c4e4; }
+  .sec-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.66);
+    margin: 0;
+    font-weight: 300;
+  }
+
+  @media (max-width: 1100px) {
+    .header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 60px; }
+  }
+  @media (max-width: 800px) {
+    .sectors { padding: 80px 24px; }
+    .priority { grid-template-columns: 1fr; }
+    .secondary { grid-template-columns: 1fr; }
+    .prio-card { height: 320px; }
+    .prio-body h3 { font-size: 26px; }
+    h2 { font-size: 32px !important; }
+  }
+</style>

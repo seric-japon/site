@@ -1,0 +1,94 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath, isCJK } from "../i18n/utils";
+import Img from "./Img.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const titleSize = isCJK(lang) ? "48px" : "56px";
+---
+<section id="contact" class="cta-band">
+  <div class="cta-bg">
+    <Img src="/images/tokyo-night.jpg" alt="Tokyo de nuit" position="center" />
+  </div>
+  <div class="cta-veil" />
+
+  <div class="wrap">
+    <div class="content">
+      <h2 style={`font-size:${titleSize};`}>{t("cta_title")}</h2>
+      <p>{t("cta_sub")}</p>
+      <div class="ctas">
+        <a href={localizedPath(lang, "/contact")} class="btn">
+          {t("hero_cta_primary")} <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    background: #071629;
+    color: #fff;
+    padding: 140px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    opacity: 0.4;
+  }
+  .cta-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #071629 50%, transparent 100%);
+  }
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .content { max-width: 760px; }
+  h2 {
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin: 0 0 24px;
+    text-wrap: balance;
+  }
+  p {
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 44px;
+    font-weight: 300;
+    max-width: 600px;
+  }
+  .ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    padding: 18px 36px;
+    background: #a6c4e4;
+    color: #0b2240;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.25s;
+  }
+  .btn:hover { background: #fff; }
+
+  @media (max-width: 900px) {
+    .cta-band { padding: 80px 24px; }
+    h2 { font-size: 32px !important; }
+    p { font-size: 16px; }
+  }
+</style>

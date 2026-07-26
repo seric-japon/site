@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HistoirePage from "../../components/pages/HistoirePage.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "ja" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout
+  lang={lang}
+  title={t("histoire_meta_title")}
+  description={t("histoire_meta_desc")}
+  path="/histoire"
+>
+  <HistoirePage lang={lang} />
+</BaseLayout>

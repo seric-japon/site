@@ -1,0 +1,137 @@
+---
+// Adaptive nav. Default behaviour: transparent over the hero, becomes solid white
+// once the user scrolls past the hero. Driven by [data-nav-mode] toggled by site.ts.
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath } from "../i18n/utils";
+import SericLogo from "./SericLogo.astro";
+import LangSwitcher from "./LangSwitcher.astro";
+
+interface Props {
+  lang: Lang;
+  /** transparent_to_white (default), white, or dark_glass */
+  navStyle?: "transparent_to_white" | "white" | "dark_glass";
+  /** Locale-agnostic path of the current page (for the language switcher). */
+  path?: string;
+}
+const { lang, navStyle = "transparent_to_white", path = "/" } = Astro.props;
+const t = useTranslations(lang);
+
+const initialMode =
+  navStyle === "white" ? "white" : navStyle === "dark_glass" ? "dark" : "transparent";
+
+const navLinks: { key: "nav_solutions" | "nav_sectors" | "nav_story" | "nav_contact"; to: string }[] = [
+  { key: "nav_solutions", to: "/solutions" },
+  { key: "nav_sectors",   to: "/secteurs" },
+  { key: "nav_story",     to: "/histoire" },
+  { key: "nav_contact",   to: "/contact" },
+];
+---
+<header data-nav data-nav-style={navStyle} data-nav-mode={initialMode}>
+  <div class="nav-inner">
+    <SericLogo size="lg" href={localizedPath(lang, "/")} />
+    <nav class="nav-links">
+      {navLinks.map((l) => (
+        <a href={localizedPath(lang, l.to)}>{t(l.key)}</a>
+      ))}
+    </nav>
+    <div class="nav-switcher-dark">
+      <LangSwitcher current={lang} variant="dark" compact path={path} />
+    </div>
+    <div class="nav-switcher-light">
+      <LangSwitcher current={lang} variant="light" compact path={path} />
+    </div>
+  </div>
+</header>
+
+<style>
+  [data-nav] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    border-bottom: 1px solid transparent;
+    transition:
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+  [data-nav][data-nav-mode="transparent"] {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+    box-shadow: none;
+  }
+  [data-nav][data-nav-mode="white"] {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: rgba(11, 34, 64, 0.12);
+    box-shadow:
+      0 1px 0 rgba(11, 34, 64, 0.04),
+      0 6px 24px rgba(11, 34, 64, 0.04);
+  }
+  [data-nav][data-nav-mode="dark"] {
+    background: rgba(7, 22, 41, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+  }
+
+  .nav-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 16px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .nav-links a {
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  /* Link colour by mode */
+  [data-nav-mode="transparent"] .nav-links a {
+    color: rgba(255, 255, 255, 0.86);
+  }
+  [data-nav-mode="transparent"] .nav-links a:hover {
+    color: #a6c4e4;
+  }
+  [data-nav-mode="white"] .nav-links a {
+    color: #0b2240;
+  }
+  [data-nav-mode="white"] .nav-links a:hover {
+    color: #6b95c4;
+  }
+  [data-nav-mode="dark"] .nav-links a {
+    color: rgba(255, 255, 255, 0.82);
+  }
+  [data-nav-mode="dark"] .nav-links a:hover {
+    color: #a6c4e4;
+  }
+
+  /* Show the right LangSwitcher variant based on nav mode */
+  .nav-switcher-light { display: none; }
+  [data-nav-mode="white"] .nav-switcher-dark { display: none; }
+  [data-nav-mode="white"] .nav-switcher-light { display: inline-flex; }
+
+  @media (max-width: 900px) {
+    .nav-inner { padding: 14px 24px; }
+    .nav-links { display: none; }
+  }
+</style>

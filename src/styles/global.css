@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@theme {
+  /* SERIC brand tokens — Pantone 277 U + navy + warm neutrals */
+  --color-brand-blue: #a6c4e4;
+  --color-brand-blue-deep: #6b95c4;
+  --color-brand-navy: #0b2240;
+  --color-brand-navy-deep: #071629;
+  --color-brand-ink: #0a1a2e;
+  --color-brand-cream: #f4efe6;
+  --color-brand-paper: #fbfaf7;
+  --color-brand-warm-gray: #e8e4dc;
+
+  --font-sans:
+    "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-jp:
+    "Inter", "Noto Sans JP", sans-serif;
+  --font-kr:
+    "Inter", "Noto Sans KR", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  font-family: var(--font-sans);
+  color: #0a1a2e;
+}
+
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #a6c4e4;
+  color: #0b2240;
+}
+
+.seric-premium {
+  font-feature-settings: "kern" 1, "liga" 1, "palt" 1;
+}
+
+body:lang(ja) .seric-premium {
+  font-family: var(--font-jp);
+}
+
+body:lang(ko) .seric-premium {
+  font-family: var(--font-kr);
+  /* Le coréen se coupe entre les mots (jamais au milieu d'un mot comme
+     산업계) — comportement CJK par défaut sinon. */
+  word-break: keep-all;
+}
+
+/* Reveal-on-scroll: hidden until JS adds .is-visible */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children inside a revealed parent */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+[data-reveal-stagger].is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-stagger].is-visible > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+[data-reveal-stagger].is-visible > *:nth-child(2) {
+  transition-delay: 100ms;
+}
+[data-reveal-stagger].is-visible > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+[data-reveal-stagger].is-visible > *:nth-child(4) {
+  transition-delay: 300ms;
+}
+[data-reveal-stagger].is-visible > *:nth-child(5) {
+  transition-delay: 400ms;
+}
+[data-reveal-stagger].is-visible > *:nth-child(6) {
+  transition-delay: 500ms;
+}
+
+/* Horizontal sliding reveal for the Story section */
+[data-reveal-left] {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+[data-reveal-left].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+[data-reveal-right] {
+  opacity: 0;
+  transform: translateX(20px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+[data-reveal-right].is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Diagonal-stripe placeholder pattern (industrial monochrome) */
+.placeholder-stripe-dark {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #0b1726 0,
+      #0b1726 14px,
+      rgba(166, 196, 228, 0.06) 14px,
+      rgba(166, 196, 228, 0.06) 15px
+    ),
+    #0b1726;
+}
+.placeholder-stripe-navy {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #0b2240 0,
+      #0b2240 14px,
+      rgba(255, 255, 255, 0.04) 14px,
+      rgba(255, 255, 255, 0.04) 15px
+    ),
+    #0b2240;
+}
+.placeholder-stripe-cream {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #f4efe6 0,
+      #f4efe6 14px,
+      rgba(11, 34, 64, 0.05) 14px,
+      rgba(11, 34, 64, 0.05) 15px
+    ),
+    #f4efe6;
+}

@@ -1,0 +1,51 @@
+---
+// Composition of the homepage sections for a given locale.
+import type { Lang } from "../i18n/ui";
+import { localizedPath } from "../i18n/utils";
+
+import Nav from "./Nav.astro";
+import Hero from "./Hero.astro";
+import Strapline from "./Strapline.astro";
+import Stats from "./Stats.astro";
+import Solutions from "./Solutions.astro";
+import Sectors from "./Sectors.astro";
+import Why from "./Why.astro";
+import Story from "./Story.astro";
+import Trust from "./Trust.astro";
+import CTA from "./CTA.astro";
+import Footer from "./Footer.astro";
+
+interface Props {
+  lang: Lang;
+  navStyle?: "transparent_to_white" | "white" | "dark_glass";
+  heroOverlay?: "cinematic" | "subtle" | "none";
+}
+const {
+  lang,
+  navStyle = "transparent_to_white",
+  heroOverlay = "cinematic",
+} = Astro.props;
+---
+<div class="seric-premium">
+  <Nav lang={lang} navStyle={navStyle} />
+  <Hero lang={lang} heroOverlay={heroOverlay} />
+  <Trust lang={lang} />
+  <Strapline lang={lang} />
+  <Stats lang={lang} />
+  <Solutions lang={lang} href={localizedPath(lang, "/solutions")} />
+  <Sectors lang={lang} />
+  <Why lang={lang} />
+  <Story lang={lang} />
+  <CTA lang={lang} />
+  <Footer lang={lang} />
+</div>
+
+<style>
+  .seric-premium {
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #0a1a2e;
+    background: #fff;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+</style>

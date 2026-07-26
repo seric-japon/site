@@ -1,0 +1,112 @@
+---
+// Compact hero for inner pages: full-bleed image, cinematic overlay, eyebrow + title + sub.
+import Img from "./Img.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  sub?: string;
+  image: string;
+  alt: string;
+  /** object-position for the background image. */
+  position?: string;
+  titleSize?: string;
+}
+const {
+  eyebrow,
+  title,
+  sub,
+  image,
+  alt,
+  position = "center",
+  titleSize = "56px",
+} = Astro.props;
+---
+<section class="page-hero">
+  <div class="ph-image">
+    <Img src={image} alt={alt} eager position={position} />
+  </div>
+  <div class="ph-overlay" />
+  <div class="ph-glow" />
+  <div class="ph-inner">
+    <div class="ph-eyebrow">
+      <span class="rule" />
+      {eyebrow}
+    </div>
+    <h1 style={`font-size:${titleSize};`}>{title}</h1>
+    {sub && <p class="ph-sub">{sub}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    min-height: 540px;
+    display: flex;
+    align-items: flex-end;
+    background: #071629;
+    color: #fff;
+    overflow: hidden;
+  }
+  .ph-image { position: absolute; inset: 0; }
+  .ph-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba(7, 22, 41, 0.93) 0%,
+      rgba(7, 22, 41, 0.7) 42%,
+      rgba(7, 22, 41, 0.28) 100%
+    );
+  }
+  .ph-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 340px;
+    height: 340px;
+    background: linear-gradient(225deg, rgba(166, 196, 228, 0.13) 0%, transparent 60%);
+  }
+  .ph-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 56px 88px;
+  }
+  .ph-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a6c4e4;
+    margin-bottom: 26px;
+  }
+  .rule { width: 32px; height: 1px; background: #a6c4e4; }
+  h1 {
+    line-height: 1.08;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    margin: 0;
+    max-width: 880px;
+    text-wrap: balance;
+  }
+  .ph-sub {
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 640px;
+    margin: 26px 0 0;
+    font-weight: 300;
+  }
+  @media (max-width: 900px) {
+    .page-hero { min-height: 440px; }
+    .ph-inner { padding: 0 24px 56px; }
+    h1 { font-size: 36px !important; }
+    .ph-sub { font-size: 16px; }
+  }
+</style>

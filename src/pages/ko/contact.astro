@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactPage from "../../components/pages/ContactPage.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "ko" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout
+  lang={lang}
+  title={t("contact_meta_title")}
+  description={t("contact_meta_desc")}
+  path="/contact"
+>
+  <ContactPage lang={lang} />
+</BaseLayout>

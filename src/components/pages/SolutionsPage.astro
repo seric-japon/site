@@ -1,0 +1,82 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { useTranslations, isCJK } from "../../i18n/utils";
+import Nav from "../Nav.astro";
+import PageHero from "../PageHero.astro";
+import Solutions from "../Solutions.astro";
+import CTA from "../CTA.astro";
+import Footer from "../Footer.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const steps = [
+  { n: "01", t: t("sol_step_1_t"), d: t("sol_step_1_d") },
+  { n: "02", t: t("sol_step_2_t"), d: t("sol_step_2_d") },
+  { n: "03", t: t("sol_step_3_t"), d: t("sol_step_3_d") },
+];
+const titleSize = isCJK(lang) ? "44px" : "52px";
+const approachSize = isCJK(lang) ? "34px" : "40px";
+---
+<div class="seric-premium">
+  <Nav lang={lang} path="/solutions" />
+  <PageHero
+    eyebrow={t("nav_solutions")}
+    title={t("sol_hero_title")}
+    sub={t("sol_hero_sub")}
+    image="/images/tokyo-dusk.jpg"
+    alt="Tokyo au crépuscule"
+    position="center"
+    titleSize={titleSize}
+  />
+
+  <Solutions lang={lang} />
+
+  <section class="approach">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow"><span class="rule" />{t("sol_approach_eyebrow")}</div>
+        <h2 style={`font-size:${approachSize};`}>{t("sol_approach_title")}</h2>
+      </div>
+      <div class="steps" data-reveal-stagger>
+        {steps.map((s) => (
+          <div class="step">
+            <div class="num">{s.n}</div>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+  <Footer lang={lang} />
+</div>
+
+<style>
+  .approach { background: #071629; color: #fff; padding: 130px 56px; }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .head { margin-bottom: 70px; max-width: 720px; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: #a6c4e4; margin-bottom: 24px;
+  }
+  .rule { width: 28px; height: 1px; background: #a6c4e4; }
+  h2 { margin: 0; font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.10); }
+  .step { background: #071629; padding: 40px 36px 48px; }
+  .num {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px; letter-spacing: 0.18em; color: #a6c4e4; margin-bottom: 24px;
+  }
+  .step h3 { font-size: 22px; font-weight: 500; margin: 0 0 14px; color: #fff; }
+  .step p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.7); margin: 0; font-weight: 300; }
+  @media (max-width: 900px) {
+    .approach { padding: 80px 24px; }
+    .steps { grid-template-columns: 1fr; }
+    h2 { font-size: 30px !important; }
+  }
+</style>

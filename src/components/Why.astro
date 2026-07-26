@@ -1,0 +1,125 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, isCJK } from "../i18n/utils";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const items = [
+  { num: "45",  sub: "YEARS",   t: t("why_1_t"), d: t("why_1_d") },
+  { num: "02",  sub: "OFFICES", t: t("why_2_t"), d: t("why_2_d") },
+  { num: "∞",   sub: "NETWORK", t: t("why_3_t"), d: t("why_3_d") },
+];
+
+const headlineSize = isCJK(lang) ? "56px" : "64px";
+---
+<section id="about" class="why">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="rule" />
+      {t("why_title")}
+    </div>
+    <h2 style={`font-size:${headlineSize};`}>
+      {t("why_headline_a")}<br />
+      <span class="accent">{t("why_headline_b")}</span>
+    </h2>
+
+    <div class="grid" data-reveal-stagger>
+      {items.map((it) => (
+        <div class="card">
+          <div class="num-row">
+            <span class="num">{it.num}</span>
+            <span class="sub">{it.sub}</span>
+          </div>
+          <h3>{it.t}</h3>
+          <p>{it.d}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why { background: #fff; padding: 140px 56px; }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b95c4;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rule { width: 28px; height: 1px; background: #6b95c4; }
+  h2 {
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin: 0 0 80px;
+    max-width: 1000px;
+    color: #0a1a2e;
+    text-wrap: balance;
+  }
+  .accent { color: #6b95c4; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(11, 34, 64, 0.12);
+    border-bottom: 1px solid rgba(11, 34, 64, 0.12);
+  }
+  .card {
+    padding: 56px 40px;
+    border-right: 1px solid rgba(11, 34, 64, 0.12);
+  }
+  .card:last-child { border-right: none; }
+  .num-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .num {
+    font-size: 72px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #0a1a2e;
+  }
+  .sub {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #6b95c4;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 14px;
+    color: #0a1a2e;
+    letter-spacing: -0.01em;
+  }
+  .card p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(11, 34, 64, 0.66);
+    margin: 0;
+    font-weight: 400;
+  }
+
+  @media (max-width: 1000px) {
+    .grid { grid-template-columns: 1fr; }
+    .card { border-right: none; border-bottom: 1px solid rgba(11, 34, 64, 0.12); }
+    .card:last-child { border-bottom: none; }
+  }
+  @media (max-width: 700px) {
+    .why { padding: 80px 24px; }
+    h2 { font-size: 36px !important; margin-bottom: 48px; }
+    .num { font-size: 56px; }
+  }
+</style>

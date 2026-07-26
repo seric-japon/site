@@ -1,0 +1,35 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, isCJK } from "../i18n/utils";
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const fontSize = isCJK(lang) ? "38px" : "44px";
+---
+<section class="strapline" data-reveal>
+  <div class="wrap">
+    <p style={`font-size:${fontSize};`}>{t("flagships")}</p>
+  </div>
+</section>
+
+<style>
+  .strapline {
+    background: #fff;
+    padding: 120px 56px;
+    border-bottom: 1px solid rgba(11, 34, 64, 0.12);
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  p {
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #0a1a2e;
+    max-width: 1100px;
+    margin: 0;
+    text-wrap: balance;
+  }
+  @media (max-width: 900px) {
+    .strapline { padding: 80px 24px; }
+    p { font-size: 28px !important; }
+  }
+</style>

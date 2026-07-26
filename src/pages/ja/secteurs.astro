@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SecteursPage from "../../components/pages/SecteursPage.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "ja" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout
+  lang={lang}
+  title={t("secteurs_meta_title")}
+  description={t("secteurs_meta_desc")}
+  path="/secteurs"
+>
+  <SecteursPage lang={lang} />
+</BaseLayout>

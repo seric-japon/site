@@ -1,0 +1,179 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, isCJK } from "../i18n/utils";
+interface Props {
+  lang: Lang;
+  /** When set, each card becomes a link (e.g. the homepage → /solutions).
+      Left undefined on the Solutions page itself so cards are not clickable. */
+  href?: string;
+}
+const { lang, href } = Astro.props;
+const t = useTranslations(lang);
+const Tag = href ? "a" : "div";
+
+const items = [
+  { num: "01", t: t("sol_1_t"), d: t("sol_1_d") },
+  { num: "02", t: t("sol_2_t"), d: t("sol_2_d") },
+  { num: "03", t: t("sol_3_t"), d: t("sol_3_d") },
+  { num: "04", t: t("sol_4_t"), d: t("sol_4_d") },
+  { num: "05", t: t("sol_5_t"), d: t("sol_5_d") },
+  { num: "06", t: t("sol_6_t"), d: t("sol_6_d") },
+];
+
+const headingSize = isCJK(lang) ? "42px" : "48px";
+---
+<section id="solutions" class="solutions">
+  <div class="wrap">
+    <div class="header">
+      <div class="eyebrow">
+        <span class="rule" />
+        {t("nav_solutions")}
+      </div>
+      <div>
+        <h2 style={`font-size:${headingSize};`}>{t("sol_title")}</h2>
+        <p class="lede">{t("sol_lede")}</p>
+      </div>
+    </div>
+
+    <div class="grid" data-reveal-stagger>
+      {items.map((it, i) => (
+        <Tag
+          class:list={["card", { "is-link": href }]}
+          data-row={i < 3 ? "top" : "bot"}
+          data-col={(i % 3) + 1}
+          {...(href ? { href } : {})}
+        >
+          <div class="num">{it.num}</div>
+          <h3 class="t">{it.t}</h3>
+          <p class="d">{it.d}</p>
+          {href && <div class="arrow">→</div>}
+        </Tag>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .solutions { background: #fbfaf7; padding: 140px 56px; }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+
+  .header {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    margin-bottom: 90px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b95c4;
+    font-weight: 600;
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rule { width: 28px; height: 1px; background: #6b95c4; }
+
+  h2 {
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    color: #0a1a2e;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(11, 34, 64, 0.7);
+    margin: 0;
+    font-weight: 300;
+    max-width: 640px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(11, 34, 64, 0.12);
+  }
+  .card {
+    padding: 44px 36px 56px;
+    background: #fff;
+    position: relative;
+    min-height: 280px;
+    transition: background 0.25s;
+    display: block;
+    text-decoration: none;
+  }
+  .card.is-link { cursor: pointer; }
+  .card[data-col="1"], .card[data-col="2"] {
+    border-right: 1px solid rgba(11, 34, 64, 0.12);
+  }
+  .card[data-row="top"] {
+    border-bottom: 1px solid rgba(11, 34, 64, 0.12);
+  }
+
+  .num {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    color: #6b95c4;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    margin-bottom: 28px;
+    transition: color 0.25s;
+  }
+  .t {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    color: #0a1a2e;
+    transition: color 0.25s;
+  }
+  .d {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(11, 34, 64, 0.66);
+    margin: 0;
+    font-weight: 400;
+    transition: color 0.25s;
+  }
+  .arrow {
+    position: absolute;
+    bottom: 32px;
+    right: 36px;
+    font-size: 18px;
+    color: #0a1a2e;
+    transition:
+      color 0.25s,
+      transform 0.25s;
+  }
+
+  .card:hover {
+    background: #071629;
+  }
+  .card:hover .num { color: #a6c4e4; }
+  .card:hover .t { color: #fff; }
+  .card:hover .d { color: rgba(255, 255, 255, 0.72); }
+  .card:hover .arrow {
+    color: #a6c4e4;
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 1100px) {
+    .header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 60px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .card[data-col="2"] { border-right: none; }
+    .card[data-col="1"] { border-right: 1px solid rgba(11, 34, 64, 0.12); }
+    .card { border-bottom: 1px solid rgba(11, 34, 64, 0.12); }
+  }
+  @media (max-width: 700px) {
+    .solutions { padding: 80px 24px; }
+    .grid { grid-template-columns: 1fr; }
+    .card { border-right: none !important; }
+    .card[data-row="bot"]:last-child { border-bottom: none; }
+    h2 { font-size: 32px !important; }
+  }
+</style>

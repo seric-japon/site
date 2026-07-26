@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SolutionsPage from "../../components/pages/SolutionsPage.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = "ja" as const;
+const t = useTranslations(lang);
+---
+<BaseLayout
+  lang={lang}
+  title={t("solutions_meta_title")}
+  description={t("solutions_meta_desc")}
+  path="/solutions"
+>
+  <SolutionsPage lang={lang} />
+</BaseLayout>

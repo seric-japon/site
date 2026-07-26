@@ -1,0 +1,147 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { useTranslations, isCJK } from "../../i18n/utils";
+import Nav from "../Nav.astro";
+import PageHero from "../PageHero.astro";
+import Img from "../Img.astro";
+import CTA from "../CTA.astro";
+import Footer from "../Footer.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const timeline = [
+  { year: "1981", d: t("tl_1981") },
+  { year: "1998", d: t("tl_1998") },
+  { year: "2007", d: t("tl_2007") },
+  { year: "2010", d: t("tl_2010") },
+  { year: "2021", d: t("tl_2021") },
+];
+const values = [
+  t("val_1"), t("val_2"), t("val_3"), t("val_4"), t("val_5"), t("val_6"),
+];
+const titleSize = isCJK(lang) ? "44px" : "52px";
+const introSize = isCJK(lang) ? "34px" : "40px";
+---
+<div class="seric-premium">
+  <Nav lang={lang} path="/histoire" />
+  <PageHero
+    eyebrow={t("nav_story")}
+    title={t("hist_hero_title")}
+    sub={t("hist_hero_sub")}
+    image="/images/heritage.jpg"
+    alt="Tokyo, archives"
+    position="center"
+    titleSize={titleSize}
+  />
+
+  <section class="intro">
+    <div class="wrap">
+      <div class="text" data-reveal-left>
+        <h2 style={`font-size:${introSize};`}>{t("hist_intro_title")}</h2>
+        <p>{t("hist_intro_body")}</p>
+        <p class="honors">{t("hist_founder_honors")}</p>
+        <div class="signature">
+          <span>Christian Polak</span>
+          <span class="role">{t("story_caption_role")}</span>
+        </div>
+      </div>
+      <div class="media" data-reveal-right>
+        <Img src="/images/sector-culture.jpg" alt="Tokyo" position="center" />
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="wrap">
+      <h2 class="tl-title">{t("hist_timeline_title")}</h2>
+      <ol data-reveal-stagger>
+        {timeline.map((e) => (
+          <li>
+            <span class="yr">{e.year}</span>
+            <span class="dot" />
+            <span class="lbl">{e.d}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="mv">
+    <div class="wrap">
+      <div class="mission">
+        <div class="eyebrow"><span class="rule" />{t("hist_mission_title")}</div>
+        <p class="mission-body">{t("hist_mission_body")}</p>
+      </div>
+      <div class="values">
+        <h3>{t("hist_values_title")}</h3>
+        <p class="values-intro">{t("hist_values_intro")}</p>
+        <ul>
+          {values.map((v, i) => (
+            <li><span class="vn">{String(i + 1).padStart(2, "0")}</span>{v}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTA lang={lang} />
+  <Footer lang={lang} />
+</div>
+
+<style>
+  .wrap { max-width: 1320px; margin: 0 auto; }
+
+  /* Intro */
+  .intro { background: #fbfaf7; padding: 120px 56px; }
+  .intro .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; align-items: center; }
+  .intro h2 { font-weight: 500; line-height: 1.18; letter-spacing: -0.02em; margin: 0 0 28px; color: #0a1a2e; text-wrap: balance; }
+  .intro .text > p { font-size: 17px; line-height: 1.75; color: rgba(11,34,64,0.74); margin: 0 0 22px; max-width: 560px; }
+  .honors { font-size: 15px !important; color: rgba(11,34,64,0.6) !important; font-style: italic; }
+  .signature { margin-top: 32px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .signature .role { color: #6b95c4; }
+  .media { height: 480px; overflow: hidden; }
+
+  /* Timeline */
+  .timeline { background: #071629; color: #fff; padding: 120px 56px; }
+  .tl-title { font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: #a6c4e4; font-weight: 600; margin: 0 0 56px; }
+  .timeline ol { list-style: none; margin: 0; padding: 0; }
+  .timeline li {
+    display: grid; grid-template-columns: 120px 24px 1fr; align-items: center;
+    gap: 24px; padding: 26px 0; border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .timeline li:last-child { border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .yr { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 24px; font-weight: 600; color: #fff; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #a6c4e4; }
+  .lbl { font-size: 17px; color: rgba(255,255,255,0.8); font-weight: 300; }
+
+  /* Mission & values */
+  .mv { background: #fbfaf7; padding: 120px 56px; }
+  .mv .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #6b95c4; margin-bottom: 28px; }
+  .rule { width: 28px; height: 1px; background: #6b95c4; }
+  .mission-body { font-size: 26px; line-height: 1.5; font-weight: 300; color: #0a1a2e; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+  .values h3 { font-size: 22px; font-weight: 600; margin: 0 0 10px; color: #0a1a2e; }
+  .values-intro { font-size: 15px; color: rgba(11,34,64,0.6); margin: 0 0 28px; }
+  .values ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid rgba(11,34,64,0.12); }
+  .values li {
+    display: flex; align-items: baseline; gap: 14px; padding: 20px 8px;
+    font-size: 18px; font-weight: 500; color: #0a1a2e; border-bottom: 1px solid rgba(11,34,64,0.12);
+  }
+  .values li:nth-child(odd) { border-right: 1px solid rgba(11,34,64,0.12); padding-right: 24px; }
+  .vn { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: #6b95c4; letter-spacing: 0.1em; }
+
+  @media (max-width: 980px) {
+    .intro, .timeline, .mv { padding: 72px 24px; }
+    .intro .wrap, .mv .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .media { height: 300px; }
+    .timeline li { grid-template-columns: 76px 16px 1fr; gap: 16px; }
+    .yr { font-size: 20px; }
+    .mission-body { font-size: 21px; }
+  }
+  @media (max-width: 560px) {
+    .values ul { grid-template-columns: 1fr; }
+    .values li:nth-child(odd) { border-right: none; padding-right: 8px; }
+  }
+</style>

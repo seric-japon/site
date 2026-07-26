@@ -1,0 +1,35 @@
+---
+// Diagonal-stripe industrial placeholder. Replace with real imagery once available.
+interface Props {
+  caption: string;
+  tone?: "dark" | "navy" | "cream";
+  class?: string;
+}
+const { caption, tone = "dark", class: className = "" } = Astro.props;
+
+const palette = {
+  dark:  { text: "rgba(255,255,255,0.42)", cls: "placeholder-stripe-dark"  },
+  navy:  { text: "rgba(255,255,255,0.55)", cls: "placeholder-stripe-navy"  },
+  cream: { text: "rgba(11,34,64,0.45)",    cls: "placeholder-stripe-cream" },
+} as const;
+const p = palette[tone];
+---
+<div class={`placeholder ${p.cls} ${className}`} style={`color:${p.text};`}>
+  <span>[ {caption} ]</span>
+</div>
+
+<style>
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    overflow: hidden;
+    position: relative;
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath } from "../i18n/utils";
+import SericLogo from "./SericLogo.astro";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <SericLogo size="md" href={localizedPath(lang, "/")} />
+        <p>{t("foot_about_blurb")}</p>
+      </div>
+
+      <div class="col">
+        <h4>{t("foot_tokyo")}</h4>
+        <p>
+          Nihonbashi 1-chome, Mitsui Building 7F<br />
+          1-4-1 Nihonbashi, Chuo-ku<br />
+          Tokyo 103-0027<br />
+          +81 3-5542-1856
+        </p>
+      </div>
+
+      <div class="col">
+        <h4>{t("foot_seoul")}</h4>
+        <p>
+          602 Yongseong Biztel<br />
+          109 Hangang-daero, Yongsan-gu<br />
+          Seoul 04376<br />
+          +82 2-730-2740
+        </p>
+      </div>
+
+      <div class="col">
+        <h4>{t("nav_contact")}</h4>
+        <ul>
+          <li><a href={localizedPath(lang, "/solutions")}>{t("nav_solutions")}</a></li>
+          <li><a href={localizedPath(lang, "/secteurs")}>{t("nav_sectors")}</a></li>
+          <li><a href={localizedPath(lang, "/histoire")}>{t("nav_story")}</a></li>
+          <li><a href={localizedPath(lang, "/contact")}>{t("nav_contact")}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <span>{t("foot_legal")}</span>
+      <span>EST. 1981 · TOKYO · SEOUL</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #04101f;
+    color: rgba(255, 255, 255, 0.62);
+    padding: 80px 56px 40px;
+    font-size: 13px;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  .top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .brand p {
+    margin: 24px 0 0;
+    line-height: 1.7;
+    max-width: 340px;
+    font-size: 14px;
+  }
+  .col h4 {
+    font-size: 12px;
+    color: #a6c4e4;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+    font-weight: 600;
+  }
+  .col p {
+    line-height: 1.7;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .col ul a {
+    color: rgba(255, 255, 255, 0.62);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .col ul a:hover { color: #a6c4e4; }
+
+  .bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.42);
+  }
+
+  @media (max-width: 900px) {
+    .footer { padding: 60px 24px 32px; }
+    .top { grid-template-columns: 1fr 1fr; gap: 36px; margin-bottom: 40px; }
+  }
+  @media (max-width: 600px) {
+    .top { grid-template-columns: 1fr; }
+    .bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+</style>

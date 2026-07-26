@@ -1,0 +1,74 @@
+---
+// Language pill switcher. 'dark' for hero / dark backgrounds, 'light' for white nav.
+import type { Lang } from "../i18n/ui";
+import { languages } from "../i18n/ui";
+import { localizedPath } from "../i18n/utils";
+
+interface Props {
+  current: Lang;
+  variant?: "dark" | "light";
+  /** Compact = smaller padding & font (for header). */
+  compact?: boolean;
+  /** Locale-agnostic path of the current page, so switching keeps the page. */
+  path?: string;
+}
+
+const { current, variant = "dark", compact = false, path = "/" } = Astro.props;
+const isDark = variant === "dark";
+
+const items: { code: Lang; label: string }[] = [
+  { code: "fr", label: "FR" },
+  { code: "en", label: "EN" },
+  { code: "ja", label: "日本語" },
+  { code: "ko", label: "한국어" },
+];
+
+const pad = compact ? "4px 10px" : "6px 14px";
+const fontSize = compact ? "11px" : "12px";
+---
+<div
+  class="lang-pill"
+  style={`
+    background: ${isDark ? "rgba(255,255,255,0.08)" : "rgba(11,34,64,0.05)"};
+    border: 1px solid ${isDark ? "rgba(255,255,255,0.14)" : "rgba(11,34,64,0.10)"};
+  `}
+>
+  {items.map((l) => {
+    const active = l.code === current;
+    const bg = active ? (isDark ? "#A6C4E4" : "#0B2240") : "transparent";
+    const fg = active
+      ? (isDark ? "#0B2240" : "#fff")
+      : (isDark ? "rgba(255,255,255,0.72)" : "rgba(11,34,64,0.62)");
+    return (
+      <a
+        href={localizedPath(l.code, path)}
+        data-lang-link={l.code}
+        aria-current={active ? "true" : undefined}
+        style={`padding:${pad}; font-size:${fontSize}; background:${bg}; color:${fg};`}
+      >{l.label}</a>
+    );
+  })}
+</div>
+
+<style>
+  .lang-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding: 3px;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+    font-family: inherit;
+  }
+  .lang-pill a {
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: none;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    line-height: 1.2;
+  }
+</style>

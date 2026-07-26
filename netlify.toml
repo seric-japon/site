@@ -6,6 +6,12 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Tant que le site n'est pas sur le domaine officiel — À SUPPRIMER à la bascule
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    
 # En-têtes de cache : les photos/hashes sont immuables, le HTML reste revalidé.
 [[headers]]
   for = "/images/*"

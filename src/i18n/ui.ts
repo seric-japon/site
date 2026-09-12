@@ -37,7 +37,7 @@ export const ui = {
 
     // Strapline
     flagships:
-      "Nous accompagnons les fleurons industriels français, japonais et coréens.",
+      "Nous accompagnons les fleurons industriels européens, japonais et coréens.",
 
     // Solutions
     sol_title: "Six savoir-faire au service de votre développement",
@@ -102,7 +102,7 @@ export const ui = {
     story_caption_role: "Fondateur · 1981",
 
     // Trust
-    trust_title: "Ils nous font confiance",
+    trust_title: "Nous avons leur confiance",
 
     // CTA
     cta_title: "Prêt à développer votre activité au Japon ou en Corée ?",
@@ -246,7 +246,7 @@ export const ui = {
     stat_clients: "industrial clients served",
 
     flagships:
-      "We partner with the industrial flagships of France, Japan and Korea.",
+      "We partner with the industrial flagships of Europe, Japan and Korea.",
 
     sol_title: "Six areas of expertise serving your growth",
     sol_lede:
@@ -446,7 +446,7 @@ export const ui = {
     stat_clients: "産業界のお客様",
 
     flagships:
-      "私たちは、フランス・日本・韓国の産業のフラッグシップと協働しています。",
+      "私たちは、ヨーロッパ・日本・韓国の産業のフラッグシップと協働しています。",
 
     sol_title: "貴社の成長を支える6つの専門領域",
     sol_lede:
@@ -464,13 +464,13 @@ export const ui = {
     sol_4_d:
       "子会社の設立・運営、コンプライアンス、財務、採用、税務までサポート。",
     sol_5_t: "ビジネスミッション",
-    sol_5_d: "本格進出前に機会を検証する現地ミッション。",
+    sol_5_d: "本格進出前に商機を検証する現地ミッション。",
     sol_6_t: "異文化の架け橋",
     sol_6_d:
       "初回接触から長期的信頼まで、効果的な交渉のための異文化メディエーション。",
 
-    sec_title: "4つの事業分野、卓越というひとつの基準",
-    sec_auto_t: "自動車",
+    sec_title: "事業分野は4つ、卓越という基準は一つ",
+    sec_auto_t: "自動車、各種車両",
     sec_auto_d:
       "内装・外装・パワートレイン・電子部品。同一カテゴリーは一社のみという原則で完全な機密性を保証。",
     sec_auto_tag: "主力分野",
@@ -499,7 +499,7 @@ export const ui = {
     story_title: "1981年から受け継がれるビジョン。",
     story_body:
       "SERICは1981年、東京に10年間暮らしてきたフランス人実業家クリスチャン・ポラックにより、1世紀以上にわたる日仏の産業と外交の絆を引き継ぐべく設立されました。両国政府より叙勲（レジオン・ドヌール勲章、旭日小綬章）。",
-    story_cta: "歴史の詳細を見る",
+    story_cta: "社史の詳細を見る",
     story_caption_role: "創業者 · 1981",
 
     trust_title: "主なお取引先",
@@ -515,7 +515,7 @@ export const ui = {
     // メタ（内部ページ）
     solutions_meta_title: "ソリューション — SERIC",
     solutions_meta_desc:
-      "戦略・代理・提携・運営・ミッション — 日本と韓国における産業進出の全段階を支援します。",
+      "戦略・代理・提携・運営・ミッション — 日本と韓国における産業展開の全段階を支援します。",
     secteurs_meta_title: "事業分野 — SERIC",
     secteurs_meta_desc:
       "自動車、防衛・航空宇宙、エネルギー・環境、文化活動 — 日本と韓国における専門分野。",
@@ -534,7 +534,7 @@ export const ui = {
     sol_approach_title: "理解し、つなぎ、伴走する。",
     sol_step_1_t: "理解する",
     sol_step_1_d:
-      "規制・関係者・文化的な作法など、現地を読み解いたうえで、最適な一手をご提案します。",
+      "規制・関係者・文化的な作法など、現地の状況を読み解いたうえで、最適な一手をご提案します。",
     sol_step_2_t: "つなぐ",
     sol_step_2_d:
       "45年かけて築いた経営層・行政・産業パートナーのネットワークを開きます。",
@@ -636,10 +636,10 @@ export const ui = {
     stat_45y_label: "일본에서의 경험",
     stat_26y_label: "한국에서의 경험",
     stat_offices: "거점: 도쿄 · 서울",
-    stat_clients: "함께해 온 산업 고객사",
+    stat_clients: "함께해 온 고객사",
 
     flagships:
-      "프랑스·일본·한국을 대표하는 산업 기업들과 함께 일합니다.",
+      "유럽·일본·한국을 대표하는 기업들과 함께 일합니다.",
 
     sol_title: "귀사의 성장을 뒷받침하는 6가지 전문 분야",
     sol_lede:
@@ -700,7 +700,7 @@ export const ui = {
 
     cta_title: "일본 또는 한국에서의 사업 확장을 준비하고 계신가요?",
     cta_sub:
-      "도쿄·서울 팀과의 상담은 철저한 비밀 유지 하에, 부담 없이 진행됩니다.",
+      "도쿄·서울 팀과의 상담은 철저한 비밀 유지 하에, 안전하게 진행됩니다.",
 
     foot_tokyo: "SERIC 도쿄",
     foot_seoul: "SERIC 서울",

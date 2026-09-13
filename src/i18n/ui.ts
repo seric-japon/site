@@ -74,7 +74,7 @@ export const ui = {
     sec_def_tag: "Priorité",
     sec_ene_t: "Énergie & Environnement",
     sec_ene_d:
-      "Énergies renouvelables, traitement de l’eau, infrastructures publiques, ODA.",
+      "Énergies renouvelables, traitement de l’eau, infrastructures publiques et aide au développement.",
     sec_cul_t: "Activités culturelles",
     sec_cul_d:
       "Édition, prêts d’œuvres, conseil historique. Le pendant culturel d’une histoire industrielle.",
@@ -97,9 +97,9 @@ export const ui = {
     story_eyebrow: "Notre histoire",
     story_title: "Une vision portée depuis 1981.",
     story_body:
-      "SERIC a été fondée en 1981 par Christian Polak, alors entrepreneur français installé à Tokyo depuis dix ans, pour prolonger les ponts industriels et diplomatiques tissés entre la France et le Japon depuis plus d’un siècle. Une histoire reconnue par les deux gouvernements : Légion d’honneur et Ordre du Soleil Levant.",
+      "SERIC a été fondée en 1981 par Christian Polak, alors installé à Tokyo depuis dix ans, pour prolonger les ponts industriels et diplomatiques tissés entre la France et le Japon depuis plus d’un siècle. Une histoire reconnue par les deux gouvernements : Légion d’honneur et Ordre du Soleil Levant.",
     story_cta: "Lire l’histoire complète",
-    story_caption_role: "Fondateur · 1981",
+    story_caption_role: "Fondateur",
 
     // Trust
     trust_title: "Nous avons leur confiance",
@@ -157,7 +157,7 @@ export const ui = {
     sec_def_long:
       "Aéronefs, hélicoptères, navires de défense, cybersécurité. Des relations gouvernementales établies de longue date et une compréhension fine des cycles d’achat publics au Japon et en Corée.",
     sec_ene_long:
-      "Énergies renouvelables, traitement de l’eau, infrastructures publiques et projets d’aide au développement (ODA). Un domaine où les calendriers longs récompensent une présence durable.",
+      "Énergies renouvelables, traitement de l’eau, infrastructures publiques et projets d’aide au développement. Un domaine où les calendriers longs récompensent une présence durable.",
     sec_cul_long:
       "Édition, prêts d’œuvres, conseil historique. Le pendant culturel d’une histoire industrielle de plus de quarante ans entre l’Europe et l’Asie.",
 
@@ -171,8 +171,9 @@ export const ui = {
     hist_founder_honors:
       "Christian Polak est Chevalier de la Légion d’honneur et décoré de l’Ordre du Soleil Levant, rayons d’or en rosette.",
     hist_timeline_title: "Quarante-cinq ans d’expansion.",
-    tl_1981: "Création de SERIC à Tokyo.",
-    tl_1998: "Ouverture en Corée du Sud.",
+    tl_1981: "Établissement de la SERIC à Tokyo.",
+    tl_1988: "Début d’activités en Corée du Sud : aide apportée à Bolloré pour ouvrir la SCAC.",
+    tl_1998: "Établissement de la SERIC à Séoul.",
     tl_2007: "Premières activités en Mongolie.",
     tl_2010: "Bureau de Pékin.",
     tl_2021: "40ᵉ anniversaire.",
@@ -201,6 +202,8 @@ export const ui = {
     con_seoul: "SERIC Seoul",
     con_seoul_addr:
       "602 Yongseong Biztel, 109 Hangang-daero\nYongsan-gu, Séoul 04376\nCorée du Sud",
+    con_seoul_access:
+      "Station Sinyongsan (ligne 4), sorties 5 et 6 — l’immeuble est à 80 m. À 5 min à pied de la gare de Yongsan (ligne 1, KTX).",
     con_phone_label: "Téléphone",
     con_email_label: "Email",
     con_form_title: "Écrivez-nous",
@@ -217,6 +220,24 @@ export const ui = {
       "Merci, votre message a bien été envoyé. Nous revenons vers vous rapidement.",
     form_error:
       "L’envoi a échoué. Réessayez, ou écrivez-nous directement à information@seric-japon.com.",
+
+    // Fiche d'accès (page /contact/acces)
+    acces_meta_title: "Fiches d’accès · SERIC",
+    acces_meta_desc:
+      "Comment rejoindre les bureaux SERIC de Tokyo et de Séoul : adresse en langue locale, station, sortie, et fiche à imprimer.",
+    acces_title: "Venir nous voir",
+    acces_intro:
+      "Adresse en langue locale, station et sortie de métro, position à scanner. Imprimez la fiche ou enregistrez-la en PDF avant de partir.",
+    acces_sheet: "Fiche d’accès",
+    acces_addr_label: "Adresse",
+    acces_taxi_ja: "En japonais — à montrer au chauffeur de taxi",
+    acces_taxi_ko: "En coréen — à montrer au chauffeur de taxi",
+    acces_access_label: "Accès",
+    acces_qr_caption: "Scannez pour ouvrir la position dans Google Maps",
+    acces_print: "Imprimer / Enregistrer en PDF",
+    acces_directions: "Itinéraire",
+    acces_naver: "Ouvrir dans Naver Map",
+    con_sheet_link: "Fiche d’accès imprimable",
 
     // Cookie banner
     cookie_text:
@@ -280,7 +301,7 @@ export const ui = {
       "Aircraft, helicopters, naval defense, cybersecurity. Established government relations.",
     sec_def_tag: "Priority",
     sec_ene_t: "Energy & Environment",
-    sec_ene_d: "Renewables, water, public infrastructure, ODA projects.",
+    sec_ene_d: "Renewables, water, public infrastructure and development assistance.",
     sec_cul_t: "Cultural activities",
     sec_cul_d:
       "Publishing, art loans, historical advisory. The cultural counterpart to an industrial story.",
@@ -301,9 +322,9 @@ export const ui = {
     story_eyebrow: "Our story",
     story_title: "A vision carried since 1981.",
     story_body:
-      "SERIC was founded in 1981 by Christian Polak, a French entrepreneur who had already spent a decade in Tokyo, to extend the industrial and diplomatic ties woven between France and Japan over more than a century. A trajectory recognised by both governments: Legion of Honour and Order of the Rising Sun.",
+      "SERIC was founded in 1981 by Christian Polak, who had already spent a decade in Tokyo, to extend the industrial and diplomatic ties woven between France and Japan over more than a century. A trajectory recognised by both governments: Legion of Honour and Order of the Rising Sun.",
     story_cta: "Read the full story",
-    story_caption_role: "Founder · 1981",
+    story_caption_role: "Founder",
 
     trust_title: "Trusted by",
 
@@ -358,7 +379,7 @@ export const ui = {
     sec_def_long:
       "Aircraft, helicopters, naval defense, cybersecurity. Long-established government relations and a fine grasp of public procurement cycles in Japan and Korea.",
     sec_ene_long:
-      "Renewables, water treatment, public infrastructure and official development assistance (ODA). A field where long timelines reward a lasting presence.",
+      "Renewables, water treatment, public infrastructure and official development assistance. A field where long timelines reward a lasting presence.",
     sec_cul_long:
       "Publishing, art loans, historical advisory. The cultural counterpart to an industrial story spanning more than forty years between Europe and Asia.",
 
@@ -372,8 +393,9 @@ export const ui = {
     hist_founder_honors:
       "Christian Polak is a Knight of the Legion of Honour and a recipient of the Order of the Rising Sun, Gold Rays with Rosette.",
     hist_timeline_title: "Forty-five years of expansion.",
-    tl_1981: "SERIC founded in Tokyo.",
-    tl_1998: "Expansion into South Korea.",
+    tl_1981: "SERIC established in Tokyo.",
+    tl_1988: "First activities in South Korea, assisting Bolloré with the opening of SCAC.",
+    tl_1998: "SERIC established in Seoul.",
     tl_2007: "First activities in Mongolia.",
     tl_2010: "Beijing office.",
     tl_2021: "40th anniversary.",
@@ -402,6 +424,8 @@ export const ui = {
     con_seoul: "SERIC Seoul",
     con_seoul_addr:
       "602 Yongseong Biztel, 109 Hangang-daero\nYongsan-gu, Seoul 04376\nSouth Korea",
+    con_seoul_access:
+      "Sinyongsan Station (Line 4), exits 5 and 6 — the building is 80 m away. A 5-minute walk from Yongsan Station (Line 1, KTX).",
     con_phone_label: "Phone",
     con_email_label: "Email",
     con_form_title: "Write to us",
@@ -418,6 +442,24 @@ export const ui = {
       "Thank you, your message has been sent. We will get back to you shortly.",
     form_error:
       "Something went wrong. Please try again, or email us directly at information@seric-japon.com.",
+
+    // Access sheet (page /contact/acces)
+    acces_meta_title: "Getting here — SERIC",
+    acces_meta_desc:
+      "How to reach SERIC’s Tokyo and Seoul offices: address in the local language, station, exit, and a printable sheet.",
+    acces_title: "Getting here",
+    acces_intro:
+      "Address in the local language, station and exit, a scannable location. Print the sheet or save it as a PDF before you travel.",
+    acces_sheet: "Access sheet",
+    acces_addr_label: "Address",
+    acces_taxi_ja: "In Japanese — show this to your taxi driver",
+    acces_taxi_ko: "In Korean — show this to your taxi driver",
+    acces_access_label: "Getting there",
+    acces_qr_caption: "Scan to open the location in Google Maps",
+    acces_print: "Print / Save as PDF",
+    acces_directions: "Directions",
+    acces_naver: "Open in Naver Map",
+    con_sheet_link: "Printable access sheet",
 
     // Cookie banner
     cookie_text:
@@ -479,7 +521,7 @@ export const ui = {
       "航空機・ヘリコプター・防衛艦艇・サイバーセキュリティ。政府機関との確立された関係。",
     sec_def_tag: "主力分野",
     sec_ene_t: "エネルギー・環境",
-    sec_ene_d: "再生可能エネルギー、水処理、公共インフラ、ODA案件。",
+    sec_ene_d: "再生可能エネルギー、水処理、公共インフラ、開発援助案件。",
     sec_cul_t: "文化活動",
     sec_cul_d: "出版、美術品貸与、歴史考証。産業の歩みに連なる文化的活動。",
 
@@ -498,9 +540,9 @@ export const ui = {
     story_eyebrow: "ストーリー",
     story_title: "1981年から受け継がれるビジョン。",
     story_body:
-      "SERICは1981年、東京に10年間暮らしてきたフランス人実業家クリスチャン・ポラックにより、1世紀以上にわたる日仏の産業と外交の絆を引き継ぐべく設立されました。両国政府より叙勲（レジオン・ドヌール勲章、旭日小綬章）。",
+      "SERICは1981年、東京に10年間暮らしてきたクリスチャン・ポラックにより、1世紀以上にわたる日仏の産業と外交の絆を引き継ぐべく設立されました。両国政府より叙勲（レジオン・ドヌール勲章、旭日小綬章）。",
     story_cta: "社史の詳細を見る",
-    story_caption_role: "創業者 · 1981",
+    story_caption_role: "創業者",
 
     trust_title: "主なお取引先",
 
@@ -553,7 +595,7 @@ export const ui = {
     sec_def_long:
       "航空機・ヘリコプター・防衛艦艇・サイバーセキュリティ。長年にわたり築いた政府機関との関係と、日本・韓国の公共調達サイクルへの深い理解。",
     sec_ene_long:
-      "再生可能エネルギー、水処理、公共インフラ、ODA案件。長い時間軸が、持続的なプレゼンスに報いる領域です。",
+      "再生可能エネルギー、水処理、公共インフラ、開発援助案件。長い時間軸が、持続的なプレゼンスに報いる領域です。",
     sec_cul_long:
       "出版、美術品の貸与、歴史考証。40年以上にわたる欧州とアジアの産業の歩みに連なる、文化的な活動です。",
 
@@ -568,7 +610,8 @@ export const ui = {
       "クリスチャン・ポラックは、レジオン・ドヌール勲章シュヴァリエ、ならびに旭日小綬章を受章しています。",
     hist_timeline_title: "45年にわたる展開。",
     tl_1981: "東京にSERIC設立。",
-    tl_1998: "韓国へ進出。",
+    tl_1988: "韓国での活動開始。ボロレ（Bolloré）によるSCAC設立を支援。",
+    tl_1998: "ソウルにSERIC設立。",
     tl_2007: "モンゴルでの活動開始。",
     tl_2010: "北京オフィス開設。",
     tl_2021: "創業40周年。",
@@ -597,6 +640,8 @@ export const ui = {
     con_seoul: "セリク・ソウル",
     con_seoul_addr:
       "602 Yongseong Biztel, 109 Hangang-daero\nYongsan-gu, Seoul 04376\n韓国",
+    con_seoul_access:
+      "地下鉄4号線・新龍山（シンヨンサン）駅5・6番出口より約80m。龍山（ヨンサン）駅（1号線・KTX）から徒歩5分。",
     con_phone_label: "電話",
     con_email_label: "メール",
     con_form_title: "お問い合わせ",
@@ -611,6 +656,24 @@ export const ui = {
     form_success: "メッセージを送信しました。担当者より折り返しご連絡いたします。",
     form_error:
       "送信に失敗しました。時間をおいて再度お試しいただくか、information@seric-japon.com まで直接ご連絡ください。",
+
+    // アクセスシート（/contact/acces）
+    acces_meta_title: "アクセス — SERIC",
+    acces_meta_desc:
+      "セリク東京・ソウルオフィスへのアクセス。現地語の住所、最寄駅と出口、印刷用アクセスシート。",
+    acces_title: "アクセス",
+    acces_intro:
+      "現地語の住所、最寄駅と出口、地図を開くQRコード。ご出発前に印刷、またはPDFとして保存いただけます。",
+    acces_sheet: "アクセスシート",
+    acces_addr_label: "住所",
+    acces_taxi_ja: "日本語表記 — タクシーの運転手にお見せください",
+    acces_taxi_ko: "韓国語表記 — タクシーの運転手にお見せください",
+    acces_access_label: "最寄駅",
+    acces_qr_caption: "スキャンするとGoogleマップで開きます",
+    acces_print: "印刷 / PDFとして保存",
+    acces_directions: "ルート案内",
+    acces_naver: "NAVERマップで開く",
+    con_sheet_link: "印刷用アクセスシート",
 
     // Cookie バナー
     cookie_text:
@@ -673,7 +736,7 @@ export const ui = {
       "항공기·헬리콥터·함정·사이버 보안. 정부 기관과의 탄탄한 관계.",
     sec_def_tag: "주력 분야",
     sec_ene_t: "에너지·환경",
-    sec_ene_d: "재생에너지, 수처리, 공공 인프라, ODA 사업.",
+    sec_ene_d: "재생에너지, 수처리, 공공 인프라, 개발원조 사업.",
     sec_cul_t: "문화 활동",
     sec_cul_d: "출판, 미술품 대여, 역사 자문. 산업의 역사와 함께하는 문화 활동.",
 
@@ -692,9 +755,9 @@ export const ui = {
     story_eyebrow: "회사 연혁",
     story_title: "1981년부터 이어온 비전.",
     story_body:
-      "SERIC은 1981년, 도쿄에서 이미 10년을 보낸 프랑스인 기업가 크리스티앙 폴락이 한 세기 넘게 이어져 온 프랑스와 일본의 산업·외교적 유대를 잇기 위해 설립했습니다. 양국 정부가 인정한 발자취 — 레지옹 도뇌르 훈장과 욱일장 수훈.",
+      "SERIC은 1981년, 도쿄에서 이미 10년을 보낸 크리스티앙 폴락이 한 세기 넘게 이어져 온 프랑스와 일본의 산업·외교적 유대를 잇기 위해 설립했습니다. 양국 정부가 인정한 발자취 — 레지옹 도뇌르 훈장과 욱일장 수훈.",
     story_cta: "전체 이야기 보기",
-    story_caption_role: "창업자 · 1981",
+    story_caption_role: "창업자",
 
     trust_title: "주요 고객",
 
@@ -749,7 +812,7 @@ export const ui = {
     sec_def_long:
       "항공기·헬리콥터·함정·사이버 보안. 오랜 기간 쌓아온 정부 기관과의 관계, 그리고 일본·한국의 공공 조달 사이클에 대한 깊은 이해.",
     sec_ene_long:
-      "재생에너지, 수처리, 공공 인프라, ODA 사업. 긴 호흡이 지속적인 현지 기반에 보답하는 영역입니다.",
+      "재생에너지, 수처리, 공공 인프라, 개발원조 사업. 긴 호흡이 지속적인 현지 기반에 보답하는 영역입니다.",
     sec_cul_long:
       "출판, 미술품 대여, 역사 자문. 유럽과 아시아를 잇는 40년 넘는 산업 역사와 함께하는 문화 활동입니다.",
 
@@ -764,7 +827,8 @@ export const ui = {
       "크리스티앙 폴락은 레지옹 도뇌르 슈발리에 훈장과 욱일소수장을 수훈했습니다.",
     hist_timeline_title: "45년의 성장.",
     tl_1981: "도쿄에 SERIC 설립.",
-    tl_1998: "한국 진출.",
+    tl_1988: "한국에서 활동 시작. 볼로레(Bolloré)의 SCAC 설립을 지원.",
+    tl_1998: "서울에 SERIC 설립.",
     tl_2007: "몽골에서 활동 시작.",
     tl_2010: "베이징 사무소 개설.",
     tl_2021: "창립 40주년.",
@@ -793,6 +857,8 @@ export const ui = {
     con_seoul: "SERIC 서울",
     con_seoul_addr:
       "서울특별시 용산구 한강대로 109\n용성비즈텔 602호\n(우) 04376",
+    con_seoul_access:
+      "지하철 4호선 신용산역 5·6번 출구에서 80m. 용산역(1호선·KTX)에서 도보 5분.",
     con_phone_label: "전화",
     con_email_label: "이메일",
     con_form_title: "문의하기",
@@ -808,6 +874,24 @@ export const ui = {
     form_success: "메시지가 전송되었습니다. 빠른 시일 내에 연락드리겠습니다.",
     form_error:
       "전송에 실패했습니다. 다시 시도하시거나 information@seric-japon.com 으로 직접 연락해 주세요.",
+
+    // 오시는 길 안내서 (/contact/acces)
+    acces_meta_title: "오시는 길 — SERIC",
+    acces_meta_desc:
+      "SERIC 도쿄·서울 오피스 오시는 길: 현지어 주소, 가까운 역과 출구, 인쇄용 안내서.",
+    acces_title: "오시는 길",
+    acces_intro:
+      "현지어 주소, 가까운 역과 출구, 지도를 여는 QR 코드. 출발 전에 인쇄하거나 PDF로 저장하세요.",
+    acces_sheet: "오시는 길 안내서",
+    acces_addr_label: "주소",
+    acces_taxi_ja: "일본어 주소 — 택시 기사에게 보여주세요",
+    acces_taxi_ko: "한국어 주소 — 택시 기사에게 보여주세요",
+    acces_access_label: "교통편",
+    acces_qr_caption: "스캔하면 Google 지도에서 열립니다",
+    acces_print: "인쇄 / PDF로 저장",
+    acces_directions: "길찾기",
+    acces_naver: "네이버 지도에서 열기",
+    con_sheet_link: "인쇄용 안내서",
 
     // 쿠키 배너
     cookie_text:

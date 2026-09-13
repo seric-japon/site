@@ -1,0 +1,242 @@
+---
+// Fiche d'accès imprimable — une fiche par bureau.
+//
+// Le besoin réel derrière « un plan à télécharger » n'est pas une carte
+// (Google Maps fait mieux) mais : l'adresse en langue locale à montrer au
+// chauffeur de taxi, la sortie de métro exacte, et un support hors-ligne.
+// D'où une page imprimable plutôt qu'un PDF statique : elle suit les quatre
+// locales et ne se périme pas quand une adresse change.
+import type { Lang } from "../../i18n/ui";
+import { useTranslations, isCJK } from "../../i18n/utils";
+import { offices, directionsUrl, telHref } from "../../lib/offices";
+import Nav from "../Nav.astro";
+import Footer from "../Footer.astro";
+import tokyoQr from "../../assets/qr/tokyo.svg?raw";
+import seoulQr from "../../assets/qr/seoul.svg?raw";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// QR inline plutôt qu'un <img> : rien à charger, donc rien qui puisse manquer
+// à l'impression.
+const qr: Record<string, string> = { tokyo: tokyoQr, seoul: seoulQr };
+
+const sheets = offices.map((o) => {
+  const local = useTranslations(o.localLang);
+  return {
+    office: o,
+    name: t(o.nameKey),
+    addr: t(o.addrKey),
+    access: t(o.accessKey),
+    localLabel: t(o.localLabelKey),
+    // Inutile de répéter l'adresse japonaise à un visiteur japonais.
+    localAddr: o.localLang === lang ? null : local(o.addrKey),
+  };
+});
+
+const titleSize = isCJK(lang) ? "40px" : "46px";
+---
+<div class="seric-premium acces">
+  <!-- dark_glass plutôt que white : le bandeau de titre est déjà navy, la nav
+       s'y fond, et le lettrage ajouré du logo est bien plus lisible sur foncé
+       que sur blanc. -->
+  <Nav lang={lang} navStyle="dark_glass" path="/contact/acces" />
+
+  <section class="head">
+    <div class="wrap">
+      <div class="eyebrow"><span class="rule" />{t("nav_contact")}</div>
+      <h1 style={`font-size:${titleSize};`}>{t("acces_title")}</h1>
+      <p>{t("acces_intro")}</p>
+    </div>
+  </section>
+
+  <section class="sheets">
+    <div class="wrap">
+      {sheets.map((s) => (
+        <article class="sheet" id={s.office.id} data-office={s.office.id}>
+          <header class="sheet-head">
+            <div class="ident">
+              <p class="kicker">{t("acces_sheet")}</p>
+              <h2>{s.name}</h2>
+            </div>
+            <div class="qr-block">
+              <div class="qr" set:html={qr[s.office.id]} />
+              <p class="qr-caption">{t("acces_qr_caption")}</p>
+            </div>
+          </header>
+
+          <div class="sheet-body">
+            <div class="col">
+              <h3>{t("acces_addr_label")}</h3>
+              <p class="addr">{s.addr}</p>
+              <h3>{t("con_phone_label")}</h3>
+              <p class="phone"><a href={telHref(s.office)}>{s.office.phone}</a></p>
+            </div>
+            <div class="col">
+              {s.localAddr && (
+                <>
+                  <h3>{s.localLabel}</h3>
+                  <p class="addr addr-local" lang={s.office.localLang}>{s.localAddr}</p>
+                </>
+              )}
+              <h3>{t("acces_access_label")}</h3>
+              <p class="access">{s.access}</p>
+            </div>
+          </div>
+
+          <p class="print-meta">www.seric-japon.com · information@seric-japon.com</p>
+
+          <div class="actions">
+            <button type="button" data-print={s.office.id}>{t("acces_print")}</button>
+            <a href={directionsUrl(s.office, lang)} target="_blank" rel="noopener">
+              {t("acces_directions")} <span aria-hidden="true">↗</span>
+            </a>
+            {s.office.altMap && (
+              <a href={s.office.altMap.url} target="_blank" rel="noopener">
+                {t(s.office.altMap.labelKey)} <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+</div>
+
+<style>
+  .wrap { max-width: 1080px; margin: 0 auto; }
+
+  /* En-tête compact : page utilitaire, pas de hero photo (et pas d'encre
+     gaspillée à l'impression). */
+  .head { background: #071629; color: #fff; padding: 150px 56px 72px; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #a6c4e4; margin-bottom: 22px; }
+  .rule { width: 28px; height: 1px; background: #a6c4e4; }
+  .head h1 { font-weight: 500; letter-spacing: -0.02em; margin: 0 0 18px; line-height: 1.12; }
+  .head p { font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.7); margin: 0; max-width: 620px; line-height: 1.65; }
+
+  .sheets { background: #fbfaf7; padding: 88px 56px 120px; }
+  .sheet {
+    background: #fff; border: 1px solid rgba(11,34,64,0.12);
+    padding: 44px 48px 40px; scroll-margin-top: 110px;
+  }
+  .sheet + .sheet { margin-top: 40px; }
+
+  .sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid rgba(11,34,64,0.10); }
+  .kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #6b95c4; font-weight: 600; margin: 0 0 10px; }
+  .sheet-head h2 { font-size: 30px; font-weight: 600; margin: 0; color: #0a1a2e; letter-spacing: -0.01em; }
+
+  .qr-block { flex: none; width: 132px; text-align: center; }
+  .qr :global(svg) { display: block; width: 132px; height: 132px; }
+  .qr-caption { font-size: 10px; line-height: 1.45; color: rgba(11,34,64,0.5); margin: 10px 0 0; }
+
+  .sheet-body { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 56px; padding-top: 30px; }
+  .col h3 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b95c4; font-weight: 600; margin: 0 0 10px; }
+  .col > * + h3 { margin-top: 28px; }
+  .col p { margin: 0; }
+  .addr { white-space: pre-line; font-size: 16px; line-height: 1.65; color: rgba(11,34,64,0.8); }
+  /* L'adresse locale est la raison d'être de la fiche : elle doit être
+     lisible à bout de bras, dans un taxi, de nuit. */
+  .addr-local { font-size: 21px; line-height: 1.6; color: #0a1a2e; font-weight: 500; }
+  .phone { font-size: 16px; }
+  .phone a { color: #0a1a2e; text-decoration: none; border-bottom: 1px solid rgba(107,149,196,0.5); }
+  .access { font-size: 15px; line-height: 1.7; color: rgba(11,34,64,0.72); }
+
+  .print-meta { display: none; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(11,34,64,0.10); }
+  .actions button, .actions a {
+    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 14px 26px; border-radius: 0; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .actions button { background: #0b2240; color: #fff; border: 1px solid #0b2240; }
+  .actions button:hover { background: #a6c4e4; color: #0b2240; border-color: #a6c4e4; }
+  .actions a { background: transparent; color: #0b2240; border: 1px solid rgba(11,34,64,0.22); }
+  .actions a:hover { border-color: #0b2240; background: rgba(11,34,64,0.04); }
+
+  @media (max-width: 900px) {
+    .head { padding: 120px 24px 56px; }
+    .sheets { padding: 56px 24px 80px; }
+    .sheet { padding: 32px 24px 28px; }
+    .sheet-head { flex-direction: column-reverse; align-items: center; gap: 24px; text-align: center; }
+    .sheet-body { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Impression : c'est ici que se joue le « document à emporter ».
+   * ------------------------------------------------------------------ */
+  @media print {
+    .head, .actions { display: none !important; }
+    .sheets { background: #fff; padding: 0; }
+    .wrap { max-width: none; }
+
+    /* A4 ≈ 794px : la requête « max-width: 900px » ci-dessus s'applique donc
+       aussi à l'impression. On reprend la main dessus explicitement — en
+       gardant UNE colonne, car l'adresse japonaise en 17pt ne tient pas sur
+       85 mm, et c'est elle qui doit rester sur une seule ligne. */
+    .sheet-head { flex-direction: row; align-items: center; text-align: left; }
+    .sheet-body { grid-template-columns: 1fr; gap: 26px; }
+    .sheet {
+      border: none; padding: 0; margin: 0;
+      break-inside: avoid; page-break-inside: avoid;
+    }
+    .sheet + .sheet { margin-top: 0; break-before: page; page-break-before: always; }
+    .sheet-head h2 { font-size: 26pt; }
+    .qr-block, .qr :global(svg) { width: 34mm; }
+    .qr :global(svg) { height: 34mm; }
+    .addr { font-size: 12pt; color: #000; }
+    .addr-local { font-size: 17pt; color: #000; }
+    .access, .phone { font-size: 11pt; color: #000; }
+    .phone a { border: none; color: #000; }
+    .col h3 { color: #444; }
+    /* Une feuille qui traîne sur un bureau doit dire d'où elle vient. */
+    .print-meta {
+      display: block; margin: 24px 0 0; padding-top: 12px;
+      border-top: 1px solid #bbb; font-size: 9pt; color: #555;
+    }
+  }
+</style>
+
+<!-- Le bouton n'imprime que SA fiche : le voyageur pour Tokyo n'a que faire
+     de la page de Séoul. -->
+<style is:global>
+  /* Sans ça on hérite des marges par défaut du navigateur, qui varient d'un
+     navigateur à l'autre. Hors d'un bloc scopé : `@page` est une règle de
+     document, pas un sélecteur. */
+  @page { margin: 16mm; }
+
+  @media print {
+    /* Vaut aussi pour un Ctrl+P direct, sans passer par un bouton. */
+    [data-nav], footer, [data-cookie-banner] { display: none !important; }
+
+    body[data-print-only="tokyo"] .sheet[data-office="seoul"],
+    body[data-print-only="seoul"] .sheet[data-office="tokyo"] { display: none !important; }
+    /* `!important` obligatoire : le `break-before: page` de `.sheet + .sheet`
+       est scopé par Astro, donc plus spécifique que ce sélecteur global. */
+    body[data-print-only="tokyo"] .sheet[data-office="tokyo"],
+    body[data-print-only="seoul"] .sheet[data-office="seoul"] {
+      break-before: auto !important; page-break-before: auto !important;
+    }
+  }
+</style>
+
+<script>
+  const clear = () => { delete document.body.dataset.printOnly; };
+
+  document.querySelectorAll<HTMLButtonElement>("[data-print]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.body.dataset.printOnly = btn.dataset.print ?? "";
+      window.print();
+    });
+  });
+
+  // `afterprint` couvre Chrome/Firefox/Edge ; le matchMedia rattrape Safari,
+  // sans quoi l'autre fiche resterait masquée à l'écran après impression.
+  window.addEventListener("afterprint", clear);
+  const mql = window.matchMedia("print");
+  mql.addEventListener?.("change", (e) => { if (!e.matches) clear(); });
+</script>

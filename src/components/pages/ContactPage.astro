@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "../../i18n/ui";
-import { useTranslations, isCJK } from "../../i18n/utils";
+import { useTranslations, isCJK, localizedPath } from "../../i18n/utils";
+import { offices, embedUrl, directionsUrl, telHref } from "../../lib/offices";
 import Nav from "../Nav.astro";
 import PageHero from "../PageHero.astro";
 import Footer from "../Footer.astro";
@@ -10,27 +11,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const EMAIL = "information@seric-japon.com";
-// Coordonnées exactes des bâtiments (géocodées sur le bâtiment, pas sur
-// l'adresse postale, pour que le marqueur tombe pile sur l'immeuble) :
-// Tokyo = 日本橋一丁目三井ビルディング, Séoul = 용성비즈텔.
-const mapUrl = (lat: number, lng: number) =>
-  `https://maps.google.com/maps?q=${lat},${lng}&z=17&hl=${lang}&output=embed`;
-const offices = [
-  {
-    name: t("con_tokyo"),
-    addr: t("con_tokyo_addr"),
-    access: t("con_tokyo_access"),
-    phone: "+81 3-5542-1856",
-    map: mapUrl(35.6825593, 139.7746312),
-  },
-  {
-    name: t("con_seoul"),
-    addr: t("con_seoul_addr"),
-    access: "",
-    phone: "+82 2-730-2740",
-    map: mapUrl(37.5299841, 126.9681752),
-  },
-];
+const sheetPath = localizedPath(lang, "/contact/acces");
 const titleSize = isCJK(lang) ? "44px" : "52px";
 ---
 <div class="seric-premium">
@@ -53,27 +34,33 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
           <article class="office" data-reveal>
             <div class="media">
               <iframe
-                src={o.map}
-                title={o.name}
+                src={embedUrl(o, lang)}
+                title={t(o.nameKey)}
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 allowfullscreen
               ></iframe>
             </div>
             <div class="body">
-              <h3>{o.name}</h3>
-              <p class="addr">{o.addr}</p>
-              {o.access && <p class="access">{o.access}</p>}
+              <h3>{t(o.nameKey)}</h3>
+              <p class="addr">{t(o.addrKey)}</p>
+              <p class="access">{t(o.accessKey)}</p>
               <dl>
                 <div>
                   <dt>{t("con_phone_label")}</dt>
-                  <dd><a href={`tel:${o.phone.replace(/[^+\d]/g, "")}`}>{o.phone}</a></dd>
+                  <dd><a href={telHref(o)}>{o.phone}</a></dd>
                 </div>
                 <div>
                   <dt>{t("con_email_label")}</dt>
                   <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
                 </div>
               </dl>
+              <div class="office-actions">
+                <a href={directionsUrl(o, lang)} target="_blank" rel="noopener">
+                  {t("acces_directions")} <span aria-hidden="true">↗</span>
+                </a>
+                <a href={`${sheetPath}#${o.id}`}>{t("con_sheet_link")}</a>
+              </div>
             </div>
           </article>
         ))}
@@ -151,7 +138,7 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
   .office { background: #fff; border: 1px solid rgba(11,34,64,0.10); display: flex; flex-direction: column; }
   .media { height: 260px; overflow: hidden; background: #e8e4dc; }
   .media iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(0.2) contrast(1.05); }
-  .body { padding: 36px 40px 40px; }
+  .body { padding: 36px 40px 40px; display: flex; flex-direction: column; flex: 1; }
   .body h3 { font-size: 24px; font-weight: 600; margin: 0 0 18px; color: #0a1a2e; }
   .addr { white-space: pre-line; font-size: 15px; line-height: 1.7; color: rgba(11,34,64,0.74); margin: 0 0 16px; }
   .access { font-size: 14px; line-height: 1.6; color: rgba(11,34,64,0.56); margin: 0 0 24px; }
@@ -160,6 +147,17 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
   dd { margin: 0; font-size: 14px; }
   dd a { color: #0a1a2e; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
   dd a:hover { border-bottom-color: #6b95c4; }
+  /* `margin-top: auto` : les deux cartes n'ont pas le même volume de texte,
+     les boutons doivent quand même s'aligner. */
+  .office-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 26px; }
+  .office-actions a {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 20px; text-decoration: none; color: #0b2240;
+    border: 1px solid rgba(11,34,64,0.22);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .office-actions a:hover { border-color: #0b2240; background: rgba(11,34,64,0.04); }
 
   /* Form */
   .form-band { background: #071629; color: #fff; padding: 120px 56px; }

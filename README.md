@@ -51,9 +51,9 @@ Les images sont dans `public/images/` et référencées par leur chemin
 n'importe quel hébergement de fichiers. Le sitemap, les `canonical` et les
 `hreflang` sont générés automatiquement au build.
 
-À noter : `package.json` force Vite 7 via `overrides`, Astro 6 et le plugin
-Tailwind ne s'accordant pas sur la version majeure. Si le build échoue juste
-après un `npm install`, relancer `npm install` pour réappliquer l'override.
+Astro 7 et le plugin Tailwind tournent tous deux sur Vite 8 : `npm ls vite`
+doit montrer une seule version 8.x. Le projet ne contient volontairement
+**aucun `overrides`** pour Vite.
 
 ## Crédits
 

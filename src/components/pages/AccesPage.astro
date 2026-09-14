@@ -1,14 +1,17 @@
 ---
-// Fiche d'accès imprimable — une fiche par bureau.
+// Page Accès — une fiche par bureau : carte, adresse, sortie de métro, QR.
 //
-// Le besoin réel derrière « un plan à télécharger » n'est pas une carte
-// (Google Maps fait mieux) mais : l'adresse en langue locale à montrer au
-// chauffeur de taxi, la sortie de métro exacte, et un support hors-ligne.
-// D'où une page imprimable plutôt qu'un PDF statique : elle suit les quatre
-// locales et ne se périme pas quand une adresse change.
+// C'est ici que vit tout ce qui sert à VENIR ; la page Contact ne garde que
+// le formulaire. Le besoin réel derrière « un plan à télécharger » n'est pas
+// seulement une carte (Google Maps fait mieux) mais : l'adresse en langue
+// locale à montrer au chauffeur de taxi, la sortie de métro exacte, et un
+// support hors-ligne. D'où une page imprimable plutôt qu'un PDF statique :
+// elle suit les quatre locales et ne se périme pas quand une adresse change.
+// La carte intégrée est masquée à l'impression (une capture Google Maps en
+// noir et blanc ne sert personne, et mange une demi-page d'encre).
 import type { Lang } from "../../i18n/ui";
-import { useTranslations, isCJK } from "../../i18n/utils";
-import { offices, directionsUrl, telHref } from "../../lib/offices";
+import { useTranslations, isCJK, localizedPath } from "../../i18n/utils";
+import { offices, embedUrl, directionsUrl, telHref } from "../../lib/offices";
 import Nav from "../Nav.astro";
 import Footer from "../Footer.astro";
 import tokyoQr from "../../assets/qr/tokyo.svg?raw";
@@ -35,17 +38,18 @@ const sheets = offices.map((o) => {
   };
 });
 
+const formPath = localizedPath(lang, "/contact");
 const titleSize = isCJK(lang) ? "40px" : "46px";
 ---
 <div class="seric-premium acces">
   <!-- dark_glass plutôt que white : le bandeau de titre est déjà navy, la nav
        s'y fond, et le lettrage ajouré du logo est bien plus lisible sur foncé
        que sur blanc. -->
-  <Nav lang={lang} navStyle="dark_glass" path="/contact/acces" />
+  <Nav lang={lang} navStyle="dark_glass" path="/acces" />
 
   <section class="head">
     <div class="wrap">
-      <div class="eyebrow"><span class="rule" />{t("nav_contact")}</div>
+      <div class="eyebrow"><span class="rule" />{t("nav_access")}</div>
       <h1 style={`font-size:${titleSize};`}>{t("acces_title")}</h1>
       <p>{t("acces_intro")}</p>
     </div>
@@ -53,53 +57,67 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
 
   <section class="sheets">
     <div class="wrap">
-      {sheets.map((s) => (
-        <article class="sheet" id={s.office.id} data-office={s.office.id}>
-          <header class="sheet-head">
-            <div class="ident">
-              <p class="kicker">{t("acces_sheet")}</p>
-              <h2>{s.name}</h2>
+      <h2 class="sec-title">{t("con_offices_title")}</h2>
+      <div class="grid">
+        {sheets.map((s) => (
+          <article class="sheet" id={s.office.id} data-office={s.office.id}>
+            <div class="sheet-map">
+              <iframe
+                src={embedUrl(s.office, lang)}
+                title={s.name}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
             </div>
-            <div class="qr-block">
-              <div class="qr" set:html={qr[s.office.id]} />
-              <p class="qr-caption">{t("acces_qr_caption")}</p>
-            </div>
-          </header>
 
-          <div class="sheet-body">
-            <div class="col">
-              <h3>{t("acces_addr_label")}</h3>
-              <p class="addr">{s.addr}</p>
-              <h3>{t("con_phone_label")}</h3>
-              <p class="phone"><a href={telHref(s.office)}>{s.office.phone}</a></p>
-            </div>
-            <div class="col">
-              {s.localAddr && (
-                <>
-                  <h3>{s.localLabel}</h3>
-                  <p class="addr addr-local" lang={s.office.localLang}>{s.localAddr}</p>
-                </>
-              )}
-              <h3>{t("acces_access_label")}</h3>
-              <p class="access">{s.access}</p>
-            </div>
-          </div>
+            <header class="sheet-head">
+              <div class="ident">
+                <p class="kicker">{t("acces_sheet")}</p>
+                <h2>{s.name}</h2>
+              </div>
+              <div class="qr-block">
+                <div class="qr" set:html={qr[s.office.id]} />
+                <p class="qr-caption">{t("acces_qr_caption")}</p>
+              </div>
+            </header>
 
-          <p class="print-meta">www.seric-japon.com · information@seric-japon.com</p>
+            <div class="sheet-body">
+              <div class="col">
+                <h3>{t("acces_addr_label")}</h3>
+                <p class="addr">{s.addr}</p>
+                <h3>{t("con_phone_label")}</h3>
+                <p class="phone"><a href={telHref(s.office)}>{s.office.phone}</a></p>
+              </div>
+              <div class="col">
+                {s.localAddr && (
+                  <>
+                    <h3>{s.localLabel}</h3>
+                    <p class="addr addr-local" lang={s.office.localLang}>{s.localAddr}</p>
+                  </>
+                )}
+                <h3>{t("acces_access_label")}</h3>
+                <p class="access">{s.access}</p>
+              </div>
+            </div>
 
-          <div class="actions">
-            <button type="button" data-print={s.office.id}>{t("acces_print")}</button>
-            <a href={directionsUrl(s.office, lang)} target="_blank" rel="noopener">
-              {t("acces_directions")} <span aria-hidden="true">↗</span>
-            </a>
-            {s.office.altMap && (
-              <a href={s.office.altMap.url} target="_blank" rel="noopener">
-                {t(s.office.altMap.labelKey)} <span aria-hidden="true">↗</span>
+            <p class="print-meta">www.seric-japon.com · information@seric-japon.com</p>
+
+            <div class="actions">
+              <button type="button" data-print={s.office.id}>{t("acces_print")}</button>
+              <a href={directionsUrl(s.office, lang)} target="_blank" rel="noopener">
+                {t("acces_directions")} <span aria-hidden="true">↗</span>
               </a>
-            )}
-          </div>
-        </article>
-      ))}
+              {s.office.altMap && (
+                <a href={s.office.altMap.url} target="_blank" rel="noopener">
+                  {t(s.office.altMap.labelKey)} <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              <a href={`${formPath}#contact-form`}>{t("acces_form_link")} <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -118,21 +136,29 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
   .head p { font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.7); margin: 0; max-width: 620px; line-height: 1.65; }
 
   .sheets { background: #fbfaf7; padding: 88px 56px 120px; }
+  .sec-title { font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b95c4; font-weight: 600; margin: 0 0 48px; }
+  /* Tokyo et Séoul côte à côte : on compare deux bureaux, on ne déroule pas
+     un document. `align-items: start` parce que les deux fiches n'ont pas le
+     même volume (Séoul a un bouton Naver en plus). */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
   .sheet {
     background: #fff; border: 1px solid rgba(11,34,64,0.12);
-    padding: 44px 48px 40px; scroll-margin-top: 110px;
+    padding: 40px 40px 36px; scroll-margin-top: 110px;
   }
-  .sheet + .sheet { margin-top: 40px; }
 
-  .sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid rgba(11,34,64,0.10); }
+  /* La carte : utile à l'écran, inutile sur le papier. */
+  .sheet-map { height: 240px; overflow: hidden; background: #e8e4dc; margin: -40px -40px 30px; }
+  .sheet-map iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(0.2) contrast(1.05); }
+
+  .sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-bottom: 26px; border-bottom: 1px solid rgba(11,34,64,0.10); }
   .kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #6b95c4; font-weight: 600; margin: 0 0 10px; }
-  .sheet-head h2 { font-size: 30px; font-weight: 600; margin: 0; color: #0a1a2e; letter-spacing: -0.01em; }
+  .sheet-head h2 { font-size: 26px; font-weight: 600; margin: 0; color: #0a1a2e; letter-spacing: -0.01em; }
 
-  .qr-block { flex: none; width: 132px; text-align: center; }
-  .qr :global(svg) { display: block; width: 132px; height: 132px; }
+  .qr-block { flex: none; width: 112px; text-align: center; }
+  .qr :global(svg) { display: block; width: 112px; height: 112px; }
   .qr-caption { font-size: 10px; line-height: 1.45; color: rgba(11,34,64,0.5); margin: 10px 0 0; }
 
-  .sheet-body { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 56px; padding-top: 30px; }
+  .sheet-body { display: grid; grid-template-columns: 1fr; gap: 28px; padding-top: 28px; }
   .col h3 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b95c4; font-weight: 600; margin: 0 0 10px; }
   .col > * + h3 { margin-top: 28px; }
   .col p { margin: 0; }
@@ -148,8 +174,8 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
 
   .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(11,34,64,0.10); }
   .actions button, .actions a {
-    font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; padding: 14px 26px; border-radius: 0; cursor: pointer;
+    font-family: inherit; font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 13px 20px; border-radius: 0; cursor: pointer;
     display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
     transition: background 0.25s, color 0.25s, border-color 0.25s;
   }
@@ -158,21 +184,29 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
   .actions a { background: transparent; color: #0b2240; border: 1px solid rgba(11,34,64,0.22); }
   .actions a:hover { border-color: #0b2240; background: rgba(11,34,64,0.04); }
 
+  /* En dessous de ~1080 px, deux fiches côte à côte deviennent illisibles
+     (l'adresse locale en 21px ne tient pas) : on repasse l'une sous l'autre. */
+  @media (max-width: 1080px) {
+    .grid { grid-template-columns: 1fr; gap: 40px; }
+  }
   @media (max-width: 900px) {
     .head { padding: 120px 24px 56px; }
     .sheets { padding: 56px 24px 80px; }
+    .sec-title { margin-bottom: 32px; }
     .sheet { padding: 32px 24px 28px; }
+    .sheet-map { height: 220px; margin: -32px -24px 26px; }
     .sheet-head { flex-direction: column-reverse; align-items: center; gap: 24px; text-align: center; }
-    .sheet-body { grid-template-columns: 1fr; gap: 28px; }
   }
 
   /* ------------------------------------------------------------------ *
    * Impression : c'est ici que se joue le « document à emporter ».
    * ------------------------------------------------------------------ */
   @media print {
-    .head, .actions { display: none !important; }
+    .head, .actions, .sheet-map, .sec-title { display: none !important; }
     .sheets { background: #fff; padding: 0; }
     .wrap { max-width: none; }
+    /* Sur le papier, les colonnes n'ont plus de sens : une fiche par page. */
+    .grid { display: block; }
 
     /* A4 ≈ 794px : la requête « max-width: 900px » ci-dessus s'applique donc
        aussi à l'impression. On reprend la main dessus explicitement — en

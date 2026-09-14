@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PremiumHome from "../components/PremiumHome.astro";
+import AccesPage from "../components/pages/AccesPage.astro";
 import { useTranslations } from "../i18n/utils";
 
 const lang = "fr" as const;
@@ -8,8 +8,9 @@ const t = useTranslations(lang);
 ---
 <BaseLayout
   lang={lang}
-  title="SÉRIC — Le partenaire de l’industrie européenne au Japon et en Corée"
-  description={t("hero_sub")}
+  title={t("acces_meta_title")}
+  description={t("acces_meta_desc")}
+  path="/acces"
 >
-  <PremiumHome lang={lang} />
+  <AccesPage lang={lang} />
 </BaseLayout>

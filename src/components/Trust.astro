@@ -8,16 +8,17 @@ const t = useTranslations(lang);
 // Chaque entrée : `name` (repli texte + alt de l'image) et `src` optionnel.
 // Tant que `src` est vide, le placeholder texte s'affiche. Dès qu'un vrai
 // logo est déposé dans public/images/logos/, renseigner `src` pour l'afficher.
-// `tall` : marques au logo carré (ex. GEFCO), affichées un peu plus hautes
-// pour rester lisibles à côté des wordmarks horizontaux.
+// `tall` : logos qui « pèsent » moins à hauteur égale (logo carré, ou wordmark
+// doublé d'une baseline comme James Fisher), affichés un peu plus hauts pour
+// rester lisibles à côté des wordmarks simples.
 const logos: { name: string; src?: string; tall?: boolean }[] = [
   { name: "Dassault Aviation", src: "/images/logos/dassault-aviation.svg" },
   { name: "Veolia", src: "/images/logos/veolia.svg" },
   { name: "Forvia", src: "/images/logos/forvia.svg" },
   { name: "Airbus", src: "/images/logos/airbus.svg" },
   { name: "Total", src: "/images/logos/total.svg" },
-  { name: "Colas", src: "/images/logos/colas.png" },
-  { name: "Gefco", src: "/images/logos/gefco.svg", tall: true },
+  { name: "Dassault Systèmes", src: "/images/logos/dassault-systemes.svg" },
+  { name: "James Fisher & Sons", src: "/images/logos/james-fisher.png", tall: true },
   { name: "Bleistahl", src: "/images/logos/bleistahl.webp" },
 ];
 ---

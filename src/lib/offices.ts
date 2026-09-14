@@ -1,5 +1,6 @@
 // Source de vérité des deux bureaux : coordonnées, téléphone, clés i18n et
-// liens cartographiques. Utilisée par `ContactPage` et par `AccesPage`.
+// liens cartographiques. Utilisée par `AccesPage` (cartes, fiches) et par
+// `ContactPage` (téléphone et adresse, sans carte).
 //
 // Les adresses ne sont PAS dupliquées ici : elles vivent dans `ui.ts`, une par
 // locale. L'adresse « locale » — celle qu'on montre au chauffeur de taxi — est
@@ -70,7 +71,7 @@ export const offices: Office[] = [
   },
 ];
 
-/** Carte intégrée (embed sans clé API) affichée sur la page Contact. */
+/** Carte intégrée (embed sans clé API) affichée sur la page Accès. */
 export const embedUrl = (o: Office, lang: Lang): string =>
   `https://maps.google.com/maps?q=${o.lat},${o.lng}&z=17&hl=${lang}&output=embed`;
 

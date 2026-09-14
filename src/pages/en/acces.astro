@@ -1,7 +1,7 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import AccesPage from "../../../components/pages/AccesPage.astro";
-import { useTranslations } from "../../../i18n/utils";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AccesPage from "../../components/pages/AccesPage.astro";
+import { useTranslations } from "../../i18n/utils";
 
 const lang = "en" as const;
 const t = useTranslations(lang);
@@ -10,7 +10,7 @@ const t = useTranslations(lang);
   lang={lang}
   title={t("acces_meta_title")}
   description={t("acces_meta_desc")}
-  path="/contact/acces"
+  path="/acces"
 >
   <AccesPage lang={lang} />
 </BaseLayout>

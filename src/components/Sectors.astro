@@ -10,11 +10,13 @@ const sectorsHref = localizedPath(lang, "/secteurs");
 
 const priority = [
   { tt: t("sec_auto_t"), dd: t("sec_auto_d"), tag: t("sec_auto_tag"), img: "/images/sector-automobile.jpg" },
-  { tt: t("sec_def_t"),  dd: t("sec_def_d"),  tag: t("sec_def_tag"),  img: "/images/sector-aerospace.jpg" },
+  { tt: t("sec_def_t"),  dd: t("sec_def_d"),  tag: t("sec_def_tag"),  img: "/images/sector-defense.jpg" },
 ];
 const secondary = [
+  { tt: t("sec_aer_t"), dd: t("sec_aer_d"), img: "/images/sector-aerospace.jpg" },
   { tt: t("sec_ene_t"), dd: t("sec_ene_d"), img: "/images/sector-energy.jpg" },
-  { tt: t("sec_cul_t"), dd: t("sec_cul_d"), img: "/images/culture-coree.jpg" },
+  { tt: t("sec_mar_t"), dd: t("sec_mar_d"), img: "/images/sector-maritime.jpg" },
+  { tt: t("sec_met_t"), dd: t("sec_met_d"), img: "/images/sector-metals.jpg" },
 ];
 
 const headingSize = isCJK(lang) ? "42px" : "48px";
@@ -54,6 +56,16 @@ const headingSize = isCJK(lang) ? "42px" : "48px";
           </div>
         </a>
       ))}
+
+      <a class="prio-card prio-card--wide" href={sectorsHref}>
+        <div class="prio-img"><Img src="/images/culture-coree.jpg" alt={t("sec_cul_t")} /></div>
+        <div class="prio-overlay" />
+        <div class="prio-body">
+          <span class="kicker">{t("sec_patronage")}</span>
+          <h3>{t("sec_cul_t")}</h3>
+          <p>{t("sec_cul_d")}</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -162,6 +174,20 @@ const headingSize = isCJK(lang) ? "42px" : "48px";
   }
   .prio-card--sm { height: 300px; }
   .prio-card--sm .prio-body h3 { font-size: 26px; }
+  /* Le mécénat n'est pas un secteur : carte pleine largeur, en retrait de la
+     grille des six, pour qu'on ne la compte pas comme une septième. */
+  .prio-card--wide { grid-column: 1 / -1; height: 240px; }
+  .prio-card--wide .prio-body h3 { font-size: 26px; }
+  /* Carte basse et visuel clair : le dégradé par défaut ne suffit pas à
+     tenir le texte lisible. */
+  .prio-card--wide .prio-overlay {
+    background: linear-gradient(180deg, rgba(7,22,41,0.25) 0%, #071629 100%);
+    opacity: 0.8;
+  }
+  .kicker {
+    display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #a6c4e4; margin-bottom: 10px;
+  }
   .sec-card {
     padding: 32px 36px;
     background: rgba(255, 255, 255, 0.03);

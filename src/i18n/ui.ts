@@ -26,7 +26,7 @@ export const ui = {
     hero_title:
       "Le partenaire de l’industrie européenne au Japon et en Corée.",
     hero_sub:
-      "45 ans d’expertise terrain. Des partenariats industriels durables noués entre l’Europe, le Japon et la Corée.",
+      "45 ans d’expertise terrain et de partenariats industriels durables noués entre l’Europe, le Japon et la Corée.",
     hero_cta_primary: "Échanger avec la SÉRIC",
     hero_cta_secondary: "Nos solutions",
 

@@ -128,8 +128,12 @@ const headingSize = isCJK(lang) ? "42px" : "48px";
   .prio-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 30%, #071629 100%);
-    opacity: 0.55;
+    /* Le pied de carte porte le titre en blanc : sur une photo claire (ciel du
+       Rafale, mer de l'éolien) l'ancien dégradé ne descendait qu'à 3,3:1 de
+       contraste. Palier intermédiaire ajouté — imperceptible sur les photos
+       sombres, décisif sur les claires. */
+    background: linear-gradient(180deg, transparent 26%, rgba(7,22,41,0.62) 64%, #071629 100%);
+    opacity: 0.62;
     transition: opacity 0.35s;
   }
   .prio-card:hover .prio-overlay { opacity: 0.85; }

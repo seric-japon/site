@@ -18,10 +18,14 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
 ---
 <div class="seric-premium">
   <Nav lang={lang} path="/contact" />
+  <!-- Le bandeau porte tout l'intitulé de la page (demande client du
+       2026-09-15) : « Contact » / « Écrivez-nous » / les équipes sont à votre
+       écoute. Le formulaire suit directement, sans en-tête à lui — sinon les
+       trois mêmes lignes seraient écrites deux fois à 200 px d'intervalle. -->
   <PageHero
     eyebrow={t("nav_contact")}
-    title={t("con_hero_title")}
-    sub={t("con_hero_sub")}
+    title={t("con_form_title")}
+    sub={t("con_form_intro")}
     image="/images/tokyo-night.jpg"
     alt="Tokyo de nuit"
     position="center"
@@ -30,11 +34,6 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
 
   <section class="form-band" id="contact-form">
     <div class="wrap">
-      <div class="form-head">
-        <div class="eyebrow"><span class="rule" />{t("nav_contact")}</div>
-        <h2>{t("con_form_title")}</h2>
-        <p>{t("con_form_intro")}</p>
-      </div>
       <form
         class="form"
         name="contact"
@@ -92,12 +91,7 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
   .wrap { max-width: 1320px; margin: 0 auto; }
 
   /* Form */
-  .form-band { background: #071629; color: #fff; padding: 120px 56px; }
-  .form-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }
-  .form-head .eyebrow { justify-content: center; display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #a6c4e4; margin-bottom: 24px; }
-  .rule { width: 28px; height: 1px; background: #a6c4e4; }
-  .form-head h2 { font-size: 38px; font-weight: 500; letter-spacing: -0.02em; margin: 0 0 16px; }
-  .form-head p { font-size: 18px; color: rgba(255,255,255,0.7); font-weight: 300; margin: 0; }
+  .form-band { background: #071629; color: #fff; padding: 96px 56px 120px; }
   .form { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
   .field { display: flex; flex-direction: column; gap: 10px; }
@@ -131,9 +125,8 @@ const titleSize = isCJK(lang) ? "44px" : "52px";
   }
 
   @media (max-width: 900px) {
-    .form-band { padding: 72px 24px; }
+    .form-band { padding: 64px 24px 72px; }
     .field-row { grid-template-columns: 1fr; }
-    .form-head h2 { font-size: 28px; }
   }
 </style>
 

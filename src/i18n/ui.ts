@@ -104,7 +104,7 @@ export const ui = {
     why_2_t: "Équipe permanente",
     why_2_d:
       "Équipe multilingue, composée de généralistes et spécialistes, résidant au Japon et en Corée.",
-    why_3_t: "Réseau de haut niveau",
+    why_3_t: "Réseau",
     why_3_d:
       "Liens étroits avec les dirigeants d’entreprises, les administrations et les représentations européennes.",
 
@@ -148,7 +148,7 @@ export const ui = {
     // Solutions (page)
     sol_hero_title: "Tout le cycle de votre implantation, sous un même toit.",
     sol_hero_sub:
-      "De la première étude de marché au pilotage quotidien de votre filiale, la SÉRIC couvre chaque étape de votre développement industriel au Japon et en Corée.",
+      "De la première mission au pilotage quotidien de votre filiale, la SÉRIC couvre chaque étape de votre développement industriel au Japon et en Corée.",
     sol_approach_eyebrow: "Notre approche",
     sol_approach_title: "Comprendre, connecter, convaincre.",
     sol_step_1_t: "Comprendre",
@@ -200,7 +200,7 @@ export const ui = {
     tl_2026: "45ᵉ anniversaire.",
     hist_mission_title: "Notre mission",
     hist_mission_body:
-      "Catalyser les énergies d’innovation des entreprises françaises et européennes et des sociétés japonaises et coréennes, pour établir des partenariats à long terme.",
+      "Présenter les technologies européennes aux sociétés japonaises et coréennes pour établir des partenariats à long terme.",
     hist_values_title: "Six valeurs",
     hist_values_intro: "Ce qui guide chacune de nos missions.",
     val_1: "Modestie",
@@ -345,7 +345,7 @@ export const ui = {
     why_2_t: "Resident team",
     why_2_d:
       "A multilingual team of generalists and specialists, resident in Japan and Korea.",
-    why_3_t: "Top-level network",
+    why_3_t: "Network",
     why_3_d:
       "Close ties with company leadership, public administrations and European missions.",
 
@@ -385,7 +385,7 @@ export const ui = {
     // Solutions (page)
     sol_hero_title: "Your entire market presence, under one roof.",
     sol_hero_sub:
-      "From the first market study to the day-to-day running of your subsidiary, SÉRIC covers every stage of your industrial growth in Japan and Korea.",
+      "From the first mission to the day-to-day running of your subsidiary, SÉRIC covers every stage of your industrial growth in Japan and Korea.",
     sol_approach_eyebrow: "Our approach",
     sol_approach_title: "Understand, connect, convince.",
     sol_step_1_t: "Understand",
@@ -437,7 +437,7 @@ export const ui = {
     tl_2026: "45th anniversary.",
     hist_mission_title: "Our mission",
     hist_mission_body:
-      "To catalyse the innovative energies of French and European companies and their Japanese and Korean counterparts, building partnerships that last.",
+      "To introduce European technologies to Japanese and Korean companies, building partnerships that last.",
     hist_values_title: "Six values",
     hist_values_intro: "What guides every assignment we take on.",
     val_1: "Modesty",
@@ -580,7 +580,7 @@ export const ui = {
     why_2_t: "常駐チーム",
     why_2_d:
       "日本と韓国に常駐する、ジェネラリストとスペシャリストからなる多言語チーム。",
-    why_3_t: "ハイレベルなネットワーク",
+    why_3_t: "ネットワーク",
     why_3_d: "企業経営層・政府機関・欧州政府代表との緊密な関係。",
 
     story_eyebrow: "ストーリー",
@@ -617,7 +617,7 @@ export const ui = {
     // ソリューション（ページ）
     sol_hero_title: "進出のすべての段階を、ひとつの窓口で。",
     sol_hero_sub:
-      "最初の市場調査から子会社の日常運営まで、SÉRICが日本と韓国における産業進出のあらゆる段階を支援します。",
+      "最初のミッションから子会社の日常運営まで、SÉRICが日本と韓国における産業進出のあらゆる段階を支援します。",
     sol_approach_eyebrow: "私たちのアプローチ",
     sol_approach_title: "理解し、つなぎ、納得を導く。",
     sol_step_1_t: "理解する",
@@ -669,7 +669,7 @@ export const ui = {
     tl_2026: "創業45周年。",
     hist_mission_title: "私たちのミッション",
     hist_mission_body:
-      "フランス・欧州企業と日本・韓国企業のイノベーションの力を結びつけ、長期的なパートナーシップを築くこと。",
+      "欧州の技術を日本・韓国企業に紹介し、長期的なパートナーシップを築くこと。",
     hist_values_title: "6つの価値観",
     hist_values_intro: "すべての業務の指針となるもの。",
     val_1: "謙虚",
@@ -810,7 +810,7 @@ export const ui = {
     why_2_t: "상주 팀",
     why_2_d:
       "일본과 한국에 상주하는, 제너럴리스트와 스페셜리스트로 구성된 다국어 팀.",
-    why_3_t: "최고 수준의 네트워크",
+    why_3_t: "네트워크",
     why_3_d: "기업 경영진, 행정 기관, 유럽 대표부와의 긴밀한 관계.",
 
     story_eyebrow: "회사 연혁",
@@ -849,7 +849,7 @@ export const ui = {
     // 솔루션 (페이지)
     sol_hero_title: "진출의 모든 단계를 하나의 창구에서.",
     sol_hero_sub:
-      "첫 시장 조사부터 현지 법인의 일상 운영까지, SÉRIC이 일본과 한국에서의 산업 진출 전 단계를 지원합니다.",
+      "첫 미션부터 현지 법인의 일상 운영까지, SÉRIC이 일본과 한국에서의 산업 진출 전 단계를 지원합니다.",
     sol_approach_eyebrow: "우리의 접근 방식",
     sol_approach_title: "이해하고, 연결하고, 설득합니다.",
     sol_step_1_t: "이해",
@@ -901,7 +901,7 @@ export const ui = {
     tl_2026: "창립 45주년.",
     hist_mission_title: "우리의 미션",
     hist_mission_body:
-      "프랑스·유럽 기업과 일본·한국 기업의 혁신 역량을 연결하여 장기적인 파트너십을 구축하는 것.",
+      "유럽의 기술을 일본·한국 기업에 소개하여 장기적인 파트너십을 구축하는 것.",
     hist_values_title: "6가지 가치",
     hist_values_intro: "모든 프로젝트를 이끄는 원칙.",
     val_1: "겸손",

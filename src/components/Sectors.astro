@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 const sectorsHref = localizedPath(lang, "/secteurs");
 
 const priority = [
-  { tt: t("sec_auto_t"), dd: t("sec_auto_d"), tag: t("sec_auto_tag"), img: "/images/sector-automobile.jpg" },
+  { tt: t("sec_auto_t"), dd: t("sec_auto_d"), tag: t("sec_auto_tag"), img: "/images/sector-automobile.jpg", pos: "left center" },
   { tt: t("sec_def_t"),  dd: t("sec_def_d"),  tag: t("sec_def_tag"),  img: "/images/sector-defense.jpg" },
 ];
 const secondary = [
@@ -34,7 +34,7 @@ const headingSize = isCJK(lang) ? "42px" : "48px";
     <div class="priority" data-reveal-stagger>
       {priority.map((s) => (
         <a class="prio-card" href={sectorsHref}>
-          <div class="prio-img"><Img src={s.img} alt={s.tt} /></div>
+          <div class="prio-img"><Img src={s.img} alt={s.tt} position={s.pos} /></div>
           <div class="prio-overlay" />
           <div class="prio-tag">{s.tag}</div>
           <div class="prio-body">

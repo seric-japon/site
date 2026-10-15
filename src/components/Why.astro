@@ -5,10 +5,12 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+// Les légendes des compteurs étaient en dur en anglais : elles passent par
+// ui.ts comme le reste, sinon un visiteur japonais lit « YEARS ».
 const items = [
-  { num: "45",  sub: "YEARS",   t: t("why_1_t"), d: t("why_1_d") },
-  { num: "02",  sub: "OFFICES", t: t("why_2_t"), d: t("why_2_d") },
-  { num: "∞",   sub: "NETWORK", t: t("why_3_t"), d: t("why_3_d") },
+  { num: "45",  sub: t("why_1_unit"), t: t("why_1_t"), d: t("why_1_d") },
+  { num: "02",  sub: t("why_2_unit"), t: t("why_2_t"), d: t("why_2_d") },
+  { num: "∞",   sub: t("why_3_unit"), t: t("why_3_t"), d: t("why_3_d") },
 ];
 
 const headlineSize = isCJK(lang) ? "56px" : "64px";
@@ -29,7 +31,7 @@ const headlineSize = isCJK(lang) ? "56px" : "64px";
         <div class="card">
           <div class="num-row">
             <span class="num">{it.num}</span>
-            <span class="sub">{it.sub}</span>
+            <span class="sub" data-cjk={isCJK(lang) ? "" : undefined}>{it.sub}</span>
           </div>
           <h3>{it.t}</h3>
           <p>{it.d}</p>
@@ -97,6 +99,7 @@ const headlineSize = isCJK(lang) ? "56px" : "64px";
     color: #6b95c4;
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
   }
+  .sub[data-cjk] { font-family: inherit; letter-spacing: 0.12em; }
   .card h3 {
     font-size: 22px;
     font-weight: 600;

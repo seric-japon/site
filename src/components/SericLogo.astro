@@ -1,5 +1,5 @@
 ---
-// Real SERIC wordmark — Pantone 277 U knockout on transparent background.
+// Real SÉRIC wordmark — Pantone 277 U knockout on transparent background.
 // Works on both the dark hero (transparent nav) and the white nav.
 interface Props {
   size?: "sm" | "md" | "lg";
@@ -12,8 +12,8 @@ const { size = "md", href = "/" } = Astro.props;
 const heights = { sm: "22px", md: "30px", lg: "42px" } as const;
 const h = heights[size];
 ---
-<a href={href} class="seric-logo" aria-label="SERIC, accueil">
-  <img src="/images/seric-logo.png" alt="SERIC" style={`height:${h};`} />
+<a href={href} class="seric-logo" aria-label="SÉRIC, accueil">
+  <img src="/images/seric-logo.png" alt="SÉRIC" style={`height:${h};`} />
 </a>
 
 <style>

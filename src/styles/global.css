@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* SERIC brand tokens — Pantone 277 U + navy + warm neutrals */
+  /* SÉRIC brand tokens — Pantone 277 U + navy + warm neutrals */
   --color-brand-blue: #a6c4e4;
   --color-brand-blue-deep: #6b95c4;
   --color-brand-navy: #0b2240;

@@ -19,11 +19,15 @@ const t = useTranslations(lang);
 const initialMode =
   navStyle === "white" ? "white" : navStyle === "dark_glass" ? "dark" : "transparent";
 
-const navLinks: { key: "nav_solutions" | "nav_sectors" | "nav_story" | "nav_contact"; to: string }[] = [
+const navLinks: {
+  key: "nav_solutions" | "nav_sectors" | "nav_story" | "nav_contact" | "nav_access";
+  to: string;
+}[] = [
   { key: "nav_solutions", to: "/solutions" },
   { key: "nav_sectors",   to: "/secteurs" },
   { key: "nav_story",     to: "/histoire" },
   { key: "nav_contact",   to: "/contact" },
+  { key: "nav_access",    to: "/acces" },
 ];
 ---
 <header data-nav data-nav-style={navStyle} data-nav-mode={initialMode}>
@@ -91,7 +95,7 @@ const navLinks: { key: "nav_solutions" | "nav_sectors" | "nav_story" | "nav_cont
 
   .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 28px;
     font-size: 13px;
     letter-spacing: 0.08em;
     text-transform: uppercase;

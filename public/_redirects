@@ -1,0 +1,29 @@
+# Redirections 301 des URL de l'ancien site seric-japon.com (avant 2026)
+# vers les pages équivalentes du nouveau site. Netlify applique la première
+# règle qui correspond : les règles précises d'abord, les règles par langue
+# (« tout le reste ») ensuite.
+
+# Racine de l'ancien site. /contact/index.html existe tel quel dans le
+# nouveau site : pas de règle nécessaire.
+/access/*                       /acces/            301
+
+# Français
+/french/introduction/*          /histoire/         301
+/french/activity/*              /solutions/        301
+/french/access/*                /acces/            301
+/french/contact/*               /contact/          301
+/french/*                       /                  301
+
+# Anglais
+/english/introduction/*         /en/histoire/      301
+/english/activity/*             /en/solutions/     301
+/english/access/*               /en/acces/         301
+/english/contact/*              /en/contact/       301
+/english/*                      /en/               301
+
+# Japonais
+/japanese/introduction/*        /ja/histoire/      301
+/japanese/activity/*            /ja/solutions/     301
+/japanese/access/*              /ja/acces/         301
+/japanese/contact/*             /ja/contact/       301
+/japanese/*                     /ja/               301

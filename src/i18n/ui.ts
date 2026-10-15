@@ -237,7 +237,7 @@ export const ui = {
     form_success:
       "Merci, votre message a bien été envoyé. Nous revenons vers vous rapidement.",
     form_error:
-      "L’envoi a échoué. Réessayez, ou écrivez-nous directement à information@seric-japon.com.",
+      "L’envoi a échoué. Réessayez, ou écrivez-nous directement à seric-information@seric-japon.com.",
 
     // Page Accès (/acces)
     acces_meta_title: "Fiches d’accès · SÉRIC",
@@ -474,7 +474,7 @@ export const ui = {
     form_success:
       "Thank you, your message has been sent. We will get back to you shortly.",
     form_error:
-      "Something went wrong. Please try again, or email us directly at information@seric-japon.com.",
+      "Something went wrong. Please try again, or email us directly at seric-information@seric-japon.com.",
 
     // Access page (/acces)
     acces_meta_title: "Getting here — SÉRIC",
@@ -704,7 +704,7 @@ export const ui = {
     form_note: "本フォームの送信をもって、SÉRICからのご連絡に同意いただいたものとします。",
     form_success: "メッセージを送信しました。担当者より折り返しご連絡いたします。",
     form_error:
-      "送信に失敗しました。時間をおいて再度お試しいただくか、information@seric-japon.com まで直接ご連絡ください。",
+      "送信に失敗しました。時間をおいて再度お試しいただくか、seric-information@seric-japon.com まで直接ご連絡ください。",
 
     // アクセス（/acces）
     acces_meta_title: "アクセス — SÉRIC",
@@ -937,7 +937,7 @@ export const ui = {
       "본 양식을 제출하시면 SÉRIC의 연락을 받는 데 동의하시는 것으로 간주됩니다.",
     form_success: "메시지가 전송되었습니다. 빠른 시일 내에 연락드리겠습니다.",
     form_error:
-      "전송에 실패했습니다. 다시 시도하시거나 information@seric-japon.com 으로 직접 연락해 주세요.",
+      "전송에 실패했습니다. 다시 시도하시거나 seric-information@seric-japon.com 으로 직접 연락해 주세요.",
 
     // 오시는 길 (/acces)
     acces_meta_title: "오시는 길 — SÉRIC",

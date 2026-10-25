@@ -214,9 +214,19 @@ export const ui = {
     con_offices_title: "Nos bureaux",
     con_tokyo: "SÉRIC Tokyo",
     con_tokyo_addr:
-      "Nihonbashi 1-chome, Mitsui Building 7F\n1-4-1 Nihonbashi, Chuo-ku\nTokyo 103-0027, Japon",
+      "Nichirei Akashi-cho Bldg. 9F\n6-4 Akashi-cho, Chuo-ku\nTokyo 104-0044, Japon",
     con_tokyo_access:
-      "Sortie C1 de la station Nihonbashi (lignes Ginza, Tozai et Asakusa). À 3 min à pied de Mitsukoshimae, 6 min à pied de la gare de Tokyo.",
+      "Station Shintomicho (ligne Yurakucho), sortie 6 : 5 min à pied. Environ 10 min à pied de la station Tsukiji (ligne Hibiya).",
+    // Déménagement du 26 octobre 2026 — ancienne adresse gardée un an
+    // (durée de la réexpédition postale japonaise), voir `offices.ts`.
+    con_tokyo_old_addr:
+      "Nihonbashi 1-chome, Mitsui Building 7F\n1-4-1 Nihonbashi, Chuo-ku\nTokyo 103-0027, Japon",
+    addr_old_label: "Ancienne adresse (jusqu’au 25 octobre 2026)",
+    addr_new_since: "Nouvelle adresse depuis le 26 octobre 2026",
+    move_banner:
+      "À partir du 26 octobre 2026, SÉRIC Tokyo vous accueille au Nichirei Akashi-cho Bldg. 9F, Chuo-ku.",
+    move_banner_link: "Plan d’accès",
+    move_banner_close: "Masquer ce message",
     con_seoul: "SÉRIC Seoul",
     con_seoul_addr:
       "602 Yongseong Biztel, 109 Hangang-daero\nYongsan-gu, Séoul 04376\nCorée du Sud",
@@ -451,9 +461,17 @@ export const ui = {
     con_offices_title: "Our offices",
     con_tokyo: "SÉRIC Tokyo",
     con_tokyo_addr:
-      "Nihonbashi 1-chome, Mitsui Building 7F\n1-4-1 Nihonbashi, Chuo-ku\nTokyo 103-0027, Japan",
+      "Nichirei Akashi-cho Bldg. 9F\n6-4 Akashi-cho, Chuo-ku\nTokyo 104-0044, Japan",
     con_tokyo_access:
-      "Exit C1 of Nihonbashi Station (Ginza, Tozai and Asakusa lines). A 3-minute walk from Mitsukoshimae, 6 minutes on foot from Tokyo Station.",
+      "Shintomicho Station (Yurakucho line), Exit 6: a 5-minute walk. About 10 minutes on foot from Tsukiji Station (Hibiya line).",
+    con_tokyo_old_addr:
+      "Nihonbashi 1-chome, Mitsui Building 7F\n1-4-1 Nihonbashi, Chuo-ku\nTokyo 103-0027, Japan",
+    addr_old_label: "Previous address (until 25 October 2026)",
+    addr_new_since: "New address from 26 October 2026",
+    move_banner:
+      "From 26 October 2026, SÉRIC Tokyo welcomes you at Nichirei Akashi-cho Bldg. 9F, Chuo-ku.",
+    move_banner_link: "Directions",
+    move_banner_close: "Dismiss this message",
     con_seoul: "SÉRIC Seoul",
     con_seoul_addr:
       "602 Yongseong Biztel, 109 Hangang-daero\nYongsan-gu, Seoul 04376\nSouth Korea",
@@ -683,9 +701,17 @@ export const ui = {
     con_offices_title: "オフィス",
     con_tokyo: "株式会社セリク（東京）",
     con_tokyo_addr:
-      "〒103-0027\n東京都中央区日本橋1-4-1\n日本橋一丁目三井ビルディング7F",
+      "〒104-0044\n東京都中央区明石町6-4\nニチレイ明石町ビル9F",
     con_tokyo_access:
-      "日本橋駅（銀座線・東西線・都営浅草線）C1出口直結。三越前駅から徒歩3分、東京駅から徒歩6分。",
+      "東京メトロ有楽町線「新富町駅」6番出口より徒歩5分。日比谷線「築地駅」より徒歩約10分。",
+    con_tokyo_old_addr:
+      "〒103-0027\n東京都中央区日本橋1-4-1\n日本橋一丁目三井ビルディング7F",
+    addr_old_label: "旧住所（2026年10月25日まで）",
+    addr_new_since: "2026年10月26日より新住所",
+    move_banner:
+      "2026年10月26日より、東京オフィスはニチレイ明石町ビル9F（中央区明石町）へ移転いたしました。",
+    move_banner_link: "アクセス",
+    move_banner_close: "このお知らせを閉じる",
     con_seoul: "セリク・ソウル",
     con_seoul_addr:
       "602 Yongseong Biztel, 109 Hangang-daero\nYongsan-gu, Seoul 04376\n韓国",
@@ -915,9 +941,17 @@ export const ui = {
     con_offices_title: "오피스",
     con_tokyo: "SÉRIC 도쿄",
     con_tokyo_addr:
-      "니혼바시 1초메 미쓰이 빌딩 7층\n도쿄도 주오구 니혼바시 1-4-1\n103-0027 일본",
+      "니치레이 아카시초 빌딩 9층\n도쿄도 주오구 아카시초 6-4\n104-0044 일본",
     con_tokyo_access:
-      "니혼바시역(긴자선·도자이선·아사쿠사선) C1 출구. 미쓰코시마에역에서 도보 3분, 도쿄역에서 도보 6분.",
+      "신토미초역(유라쿠초선) 6번 출구에서 도보 5분. 쓰키지역(히비야선)에서 도보 약 10분.",
+    con_tokyo_old_addr:
+      "니혼바시 1초메 미쓰이 빌딩 7층\n도쿄도 주오구 니혼바시 1-4-1\n103-0027 일본",
+    addr_old_label: "이전 주소(2026년 10월 25일까지)",
+    addr_new_since: "2026년 10월 26일부터 새 주소",
+    move_banner:
+      "2026년 10월 26일부터 SÉRIC 도쿄 사무소가 니치레이 아카시초 빌딩 9층(주오구)으로 이전합니다.",
+    move_banner_link: "오시는 길",
+    move_banner_close: "이 안내 닫기",
     con_seoul: "SÉRIC 서울",
     con_seoul_addr:
       "서울특별시 용산구 한강대로 109\n용성비즈텔 602호\n(우) 04376",

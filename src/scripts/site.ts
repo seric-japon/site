@@ -2,6 +2,8 @@
 //   1. Nav: transparent over hero, becomes solid white past 560px (when navStyle="transparent_to_white")
 //   2. Reveal sections on scroll (.is-visible toggle)
 //   3. Language switcher persistence (writes preference to localStorage)
+//   4. Cookie banner
+//   5. Moving notice (Tokyo, Oct. 2026): dismiss + remember
 
 const NAV_SCROLL_THRESHOLD = 560;
 
@@ -63,6 +65,19 @@ function setupLangPersistence(): void {
   });
 }
 
+function setupMoveBanner(): void {
+  const btn = document.querySelector<HTMLButtonElement>("[data-move-banner-close]");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    document.documentElement.dataset.moveDismissed = "";
+    try {
+      localStorage.setItem("seric.move-banner", "dismissed");
+    } catch {
+      /* ignore storage errors */
+    }
+  });
+}
+
 function setupCookieBanner(): void {
   const banner = document.querySelector<HTMLElement>("[data-cookie-banner]");
   if (!banner) return;
@@ -100,6 +115,7 @@ function init(): void {
   setupReveal();
   setupLangPersistence();
   setupCookieBanner();
+  setupMoveBanner();
 }
 
 if (document.readyState === "loading") {

@@ -35,6 +35,10 @@ const sheets = offices.map((o) => {
     localLabel: t(o.localLabelKey),
     // Inutile de répéter l'adresse japonaise à un visiteur japonais.
     localAddr: o.localLang === lang ? null : local(o.addrKey),
+    notice: o.noticeKey ? t(o.noticeKey) : null,
+    previous: o.previous
+      ? { label: t(o.previous.labelKey), addr: t(o.previous.addrKey) }
+      : null,
   };
 });
 
@@ -83,6 +87,7 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
 
             <div class="sheet-body">
               <div class="col">
+                {s.notice && <p class="notice">{s.notice}</p>}
                 <h3>{t("acces_addr_label")}</h3>
                 <p class="addr">{s.addr}</p>
                 <h3>{t("con_phone_label")}</h3>
@@ -97,6 +102,14 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
                 )}
                 <h3>{t("acces_access_label")}</h3>
                 <p class="access">{s.access}</p>
+                {/* Gardée à l'impression aussi : c'est pour celui qui arrive
+                    avec une vieille carte de visite. */}
+                {s.previous && (
+                  <div class="previous">
+                    <h3>{s.previous.label}</h3>
+                    <p class="addr">{s.previous.addr}</p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -141,7 +154,7 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
   .sheet {
     background: #fff; border: 1px solid rgba(11,34,64,0.12);
-    padding: 40px 40px 36px; scroll-margin-top: 110px;
+    padding: 40px 40px 36px; scroll-margin-top: 150px;
   }
 
   /* La carte : utile à l'écran, inutile sur le papier. */
@@ -167,6 +180,14 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
   .phone { font-size: 16px; }
   .phone a { color: #0a1a2e; text-decoration: none; border-bottom: 1px solid rgba(107,149,196,0.5); }
   .access { font-size: 15px; line-height: 1.7; color: rgba(11,34,64,0.72); }
+  .notice {
+    display: inline-block; margin: 0 0 22px; padding: 6px 12px;
+    background: #0b2240; color: #f4efe6;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .previous { margin-top: 28px; padding-top: 22px; border-top: 1px dashed rgba(11,34,64,0.16); }
+  .previous h3 { color: rgba(11,34,64,0.45); }
+  .previous .addr { font-size: 13px; line-height: 1.6; color: rgba(11,34,64,0.5); }
 
   .print-meta { display: none; }
 
@@ -223,6 +244,8 @@ const titleSize = isCJK(lang) ? "40px" : "46px";
     .addr { font-size: 12pt; color: #000; }
     .addr-local { font-size: 17pt; color: #000; }
     .access, .phone { font-size: 11pt; color: #000; }
+    .notice { background: none; color: #000; border: 1px solid #000; }
+    .previous .addr { font-size: 10pt; color: #444; }
     .phone a { border: none; color: #000; }
     .col h3 { color: #444; }
     /* Une feuille qui traîne sur un bureau doit dire d'où elle vient. */

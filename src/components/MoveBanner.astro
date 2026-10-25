@@ -1,0 +1,75 @@
+---
+// Bandeau « déménagement de SÉRIC Tokyo » (26 octobre 2026), en tête de la nav.
+//
+// Dans le <header> fixe plutôt qu'au-dessus : la nav garde sa position et son
+// seuil de bascule, le bandeau descend simplement avec elle. La date est dans
+// le texte, donc le message reste juste avant, pendant et après le jour J —
+// aucune logique de date côté client. Fermeture mémorisée par `site.ts`
+// (`seric.move-banner`) ; le script inline de `BaseLayout` le masque avant le
+// premier rendu pour éviter un flash.
+//
+// ⏳ À RETIRER vers avril 2027 : supprimer <MoveBanner> dans `Nav.astro`
+// (et ce fichier). L'ancienne adresse, elle, reste un an — voir `offices.ts`.
+import type { Lang } from "../i18n/ui";
+import { useTranslations, localizedPath } from "../i18n/utils";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<div class="move-banner" data-move-banner role="region" aria-label={t("move_banner_link")}>
+  <p>
+    <span>{t("move_banner")}</span>
+    <a href={`${localizedPath(lang, "/acces")}#tokyo`}>{t("move_banner_link")} <span aria-hidden="true">→</span></a>
+  </p>
+  <button type="button" data-move-banner-close aria-label={t("move_banner_close")}>
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+
+<style>
+  .move-banner {
+    position: relative;
+    background: #0b2240;
+    color: #f4efe6;
+    border-bottom: 1px solid rgba(166, 196, 228, 0.18);
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  :global(html[data-move-dismissed]) .move-banner { display: none; }
+  p {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 9px 72px;
+    text-align: center;
+  }
+  a {
+    color: #a6c4e4;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 12px;
+    white-space: nowrap;
+  }
+  a:hover { color: #fff; }
+  button {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: 0;
+    color: rgba(244, 239, 230, 0.7);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  button:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    .move-banner { font-size: 12px; }
+    p { padding: 8px 48px 8px 16px; text-align: left; }
+    button { right: 8px; }
+  }
+</style>

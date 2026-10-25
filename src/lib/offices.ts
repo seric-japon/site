@@ -23,11 +23,19 @@ export interface Office {
   /**
    * Coordonnées du bâtiment lui-même (et non de l'adresse postale), pour que
    * le marqueur tombe pile sur l'immeuble.
-   * Tokyo = 日本橋一丁目三井ビルディング, Séoul = 용성비즈텔.
+   * Tokyo = ニチレイ明石町ビル, Séoul = 용성비즈텔.
    */
   lat: number;
   lng: number;
   phone: string;
+  /**
+   * Après un déménagement : courte mention « nouvelle adresse depuis le … »
+   * (pastille sur la fiche d'accès), et ancienne adresse gardée en clair
+   * (footer + fiche) pour qui arrive avec une vieille carte de visite.
+   * Supprimer ces deux champs suffit à tout faire disparaître.
+   */
+  noticeKey?: UIKey;
+  previous?: { addrKey: UIKey; labelKey: UIKey };
   /**
    * Lien vers la carte dominante du pays quand Google n'y suffit pas.
    * En Corée, Google Maps n'a pas le droit d'exporter les données routières :
@@ -44,9 +52,14 @@ export const offices: Office[] = [
     nameKey: "con_tokyo",
     addrKey: "con_tokyo_addr",
     accessKey: "con_tokyo_access",
-    lat: 35.6825593,
-    lng: 139.7746312,
+    lat: 35.66849,
+    lng: 139.7795,
     phone: "+81 3-5542-1856",
+    // Déménagement du 26 octobre 2026 (Nihonbashi → Akashi-cho, même
+    // téléphone). Retirer `noticeKey` vers avril 2027, `previous` fin
+    // octobre 2027 — un an, la durée de la réexpédition postale (転居届).
+    noticeKey: "addr_new_since",
+    previous: { addrKey: "con_tokyo_old_addr", labelKey: "addr_old_label" },
   },
   {
     id: "seoul",

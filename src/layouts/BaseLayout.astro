@@ -63,6 +63,14 @@ const ogImageUrl = ogImage
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {/* Bandeau déménagement déjà fermé : masqué avant le premier rendu. */}
+    <script is:inline>
+      try {
+        if (localStorage.getItem("seric.move-banner") === "dismissed")
+          document.documentElement.dataset.moveDismissed = "";
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <slot />

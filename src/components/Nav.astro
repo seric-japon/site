@@ -5,6 +5,7 @@ import type { Lang } from "../i18n/ui";
 import { useTranslations, localizedPath } from "../i18n/utils";
 import SericLogo from "./SericLogo.astro";
 import LangSwitcher from "./LangSwitcher.astro";
+import MoveBanner from "./MoveBanner.astro";
 
 interface Props {
   lang: Lang;
@@ -31,6 +32,7 @@ const navLinks: {
 ];
 ---
 <header data-nav data-nav-style={navStyle} data-nav-mode={initialMode}>
+  <MoveBanner lang={lang} />
   <div class="nav-inner">
     <SericLogo size="lg" href={localizedPath(lang, "/")} />
     <nav class="nav-links">

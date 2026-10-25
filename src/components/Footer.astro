@@ -2,10 +2,24 @@
 import type { Lang } from "../i18n/ui";
 import { useTranslations, localizedPath } from "../i18n/utils";
 import SericLogo from "./SericLogo.astro";
+import { offices } from "../lib/offices";
 
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+// Adresses lues dans `ui.ts` via `offices.ts`, comme sur la page Accès :
+// une seule source à modifier quand un bureau déménage.
+const cols = offices.map((o) => ({
+  id: o.id,
+  heading: t(o.id === "tokyo" ? "foot_tokyo" : "foot_seoul"),
+  lines: t(o.addrKey).split("\n"),
+  phone: o.phone,
+  previous: o.previous && {
+    label: t(o.previous.labelKey),
+    addr: t(o.previous.addrKey).split("\n").join(lang === "ja" ? " " : ", "),
+  },
+}));
 ---
 <footer class="footer">
   <div class="wrap">
@@ -15,25 +29,21 @@ const t = useTranslations(lang);
         <p>{t("foot_about_blurb")}</p>
       </div>
 
-      <div class="col">
-        <h4>{t("foot_tokyo")}</h4>
-        <p>
-          Nihonbashi 1-chome, Mitsui Building 7F<br />
-          1-4-1 Nihonbashi, Chuo-ku<br />
-          Tokyo 103-0027<br />
-          +81 3-5542-1856
-        </p>
-      </div>
-
-      <div class="col">
-        <h4>{t("foot_seoul")}</h4>
-        <p>
-          602 Yongseong Biztel<br />
-          109 Hangang-daero, Yongsan-gu<br />
-          Seoul 04376<br />
-          +82 2-730-2740
-        </p>
-      </div>
+      {cols.map((c) => (
+        <div class="col">
+          <h4>{c.heading}</h4>
+          <p>
+            {c.lines.map((l) => <>{l}<br /></>)}
+            {c.phone}
+          </p>
+          {c.previous && (
+            <p class="previous">
+              <span>{c.previous.label}</span>
+              {c.previous.addr}
+            </p>
+          )}
+        </div>
+      ))}
 
       <div class="col">
         <h4>{t("nav_contact")}</h4>
@@ -87,6 +97,13 @@ const t = useTranslations(lang);
     margin: 0;
     color: rgba(255, 255, 255, 0.62);
   }
+  .col .previous {
+    margin-top: 16px;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.40);
+  }
+  .previous span { display: block; color: rgba(255, 255, 255, 0.52); }
   .col ul {
     list-style: none;
     padding: 0;
